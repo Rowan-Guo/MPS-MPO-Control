@@ -5,6 +5,7 @@ on:
       - 'feeder33.py'
       - 'measured_profiles.py'
       - 'realistic_benchmark.py'
+      - 'sensitivity.py'
       - 'test_realistic.py'
       - 'data/**'
       - '.github/workflows/realistic.yml'
@@ -27,7 +28,13 @@ jobs:
         run: |
           python realistic_benchmark.py --harmonics 16 --components 3 --max-test 320 --out examples/ieee33_ausgrid_results.json
           cat examples/ieee33_ausgrid_results.json
+      - name: PV-penetration and EM-seed sensitivity
+        run: |
+          python sensitivity.py --scales 0.8 1.5 2.2 --seeds 20261120 20261121 20261122 --max-test 240 --harmonics 16 --out examples/ieee33_ausgrid_sensitivity.csv
+          cat examples/ieee33_ausgrid_sensitivity.csv
       - uses: actions/upload-artifact@v4
         with:
           name: ieee33-ausgrid-results
-          path: examples/ieee33_ausgrid_results.json
+          path: |
+            examples/ieee33_ausgrid_results.json
+            examples/ieee33_ausgrid_sensitivity.csv

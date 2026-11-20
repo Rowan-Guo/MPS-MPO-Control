@@ -26,7 +26,7 @@ python realistic_benchmark.py --harmonics 16 --components 3 --max-test 320 \
    --out examples/ieee33_ausgrid_results.json
 ```
 
-运行 `--solar-scale` 改变分布式光伏渗透率，例如 `1.0`、`1.5`、`2.0`；使用不同 `--seed` 检验 EM 初值与数据分布拟合的稳定性。实验自动记录开关动作差异、期望损失、独立 AC 验证、越限频率、拟合误差、日块 bootstrap 置信区间及离线 AC 调用数。
+运行 `--solar-scale` 改变光伏渗透率；使用不同 `--seed` 检验 EM 初值与数据分布拟合的稳定性。可直接运行 `python sensitivity.py` 完成三个 PV 缩放系数 × 三个 EM 随机种子的稳健性扫描，并生成 `examples/ieee33_ausgrid_sensitivity.csv`。实验自动记录开关动作差异、期望损失、独立 AC 验证、越限频率、拟合误差、日块 bootstrap 置信区间及离线 AC 调用数。
 
 ### 方法适用范围
 
