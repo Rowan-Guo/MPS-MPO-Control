@@ -1,0 +1,131 @@
+{
+  "dataset": "Ausgrid Customer 12 measured GC/GG July 2011-June 2012",
+  "benchmark": "Baran-Wu IEEE 33-bus, MATPOWER case33bw (radial normally-closed lines)",
+  "mapping": "synthetic node-level scaling and disjoint same-hour whole-day lags of one real household",
+  "train_intervals": 7680,
+  "test_intervals": 5520,
+  "evaluated_intervals": 320,
+  "random_sites": 12,
+  "observed_sites": 2,
+  "possible_states": 531441,
+  "probability_scalars": 288,
+  "probability_max_bond": 3,
+  "mpo_scalars_per_action_monitor": 32868,
+  "mpo_max_bond": 33,
+  "offline_ac_calibration_calls": 150,
+  "total_heldout_ac_calls": 2240,
+  "fourier_uniform_bound": 0.0017642725922239076,
+  "voltage_surrogate_mae": 0.002467853104638107,
+  "tt_mean_loss": 0.00018141863090728855,
+  "mean_plug_in_loss": 0.0003928317878189206,
+  "independent_tt_mean_loss": 0.0002248145605286204,
+  "oracle_mean_loss": 0.00018141863090728855,
+  "tt_oracle_action_rate": 1,
+  "action_histograms": {
+    "tt": [
+      0,
+      0,
+      8,
+      0,
+      95,
+      217
+    ],
+    "mean": [
+      0,
+      0,
+      168,
+      0,
+      25,
+      127
+    ],
+    "independent": [
+      0,
+      0,
+      70,
+      0,
+      34,
+      216
+    ]
+  },
+  "improvement_vs_mean": 0.00021141315691163205,
+  "improvement_vs_mean_percent": 53.81773152458957,
+  "improvement_vs_mean_ci95": [
+    0.00012060061174313314,
+    0.0003117874384378838
+  ],
+  "improvement_vs_independent": 0.000043395929621331865,
+  "improvement_vs_independent_ci95": [
+    0.000008795522798012963,
+    0.00009137318406892908
+  ],
+  "different_actions_vs_mean": 0.575,
+  "different_actions_vs_independent": 0.384375,
+  "tt_unsafe_fraction": 0,
+  "mean_unsafe_fraction": 0,
+  "tt_regret_vs_oracle": 0,
+  "train_regime_sizes": {
+    "0": {
+      "samples": 1920,
+      "em_iter": 85,
+      "probability_scalars": 288
+    },
+    "1": {
+      "samples": 1920,
+      "em_iter": 35,
+      "probability_scalars": 288
+    },
+    "2": {
+      "samples": 1920,
+      "em_iter": 71,
+      "probability_scalars": 288
+    },
+    "3": {
+      "samples": 1920,
+      "em_iter": 59,
+      "probability_scalars": 288
+    }
+  },
+  "empirical_conditions_used": 28,
+  "source_first_timestamp": "2011-07-01T00:00",
+  "source_last_timestamp": "2012-06-30T23:30",
+  "train_last_measured_day": 192,
+  "test_first_measured_day": 215,
+  "configuration": {
+    "harmonics": 16,
+    "components": 3,
+    "seed": 20261120,
+    "deadband": 0.02,
+    "slack": 1.02,
+    "base_load_scale": 0.65,
+    "monitor_buses": [
+      18,
+      33
+    ],
+    "control_buses": [
+      18,
+      33
+    ],
+    "variable_buses": [
+      5,
+      6,
+      8,
+      11,
+      14,
+      17,
+      18,
+      23,
+      24,
+      25,
+      30,
+      33
+    ],
+    "observed_site_positions": [
+      2,
+      10
+    ],
+    "train_days": 160,
+    "test_start_day": 215,
+    "test_days": 115,
+    "solar_scale": 1.5
+  }
+}
