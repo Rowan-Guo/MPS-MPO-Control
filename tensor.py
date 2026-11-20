@@ -1,13 +1,10 @@
-"""Classical tensor-train (MPS) Born probabilities and diagonal MPO contractions.
+"""Categorical MPS/TT representations and diagonal MPO contractions.
 
-Each categorical load is ONE physical site, with its own local dimension (normally 3).
-There are no padded binary states. The diagonal MPO is stored as its diagonal
-TT slices of shape (r_left, d, r_right), not a dense four-index operator.
-
-For a nonnegative normalized joint table p, ``amplitude_state(p)`` gives an MPS
-representing sqrt(p). Rank truncation is performed on the *amplitude*; the
-resulting Born distribution is re-normalized and remains nonnegative. A truncated
-operator is only an approximation; safety indicators should not be truncated.
+Represents each categorical load with one local physical site (typically d=3),
+using compact diagonal operator cores of shape (r_left, d, r_right).
+Provides TT-SVD with controllable rank and Frobenius tolerance, normalized
+Born-MPS probability amplitudes, exact safety-indicator tensors and conditional
+expectation contractions.
 """
 from __future__ import annotations
 
