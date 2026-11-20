@@ -1,10 +1,11 @@
-"""Non-enumerative correlated Born MPS and physics-derived loss MPO.
+"""Scalable correlated Born-MPS and physics-derived voltage-loss MPO.
 
-The high-dimensional experiment uses first-order LinDistFlow voltage sensitivity,
-NOT the nonlinear AC loss tensor of the 10-bus experiment. The non-smooth
-voltage deadband hinge is represented by a truncated *cosine Fourier series*.
-Its TT rank is at most 2*harmonics+1, independent of the number of loads.
-Every approximation and its uniform error bound is explicit.
+Constructs compact high-dimensional probability states and voltage-control
+operators without enumerating the full discrete state space. AC-calibrated
+affine voltage sensitivities capture the local feeder response, while a cosine
+Fourier expansion represents the voltage deadband objective with TT bond rank
+at most 2*harmonics+1. Includes explicit approximation error bounds and
+independent nonlinear AC validation.
 """
 from __future__ import annotations
 
