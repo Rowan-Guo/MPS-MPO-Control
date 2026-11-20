@@ -1,0 +1,35 @@
+{
+  "harmonics": 16,
+  "evidence_cases": 36,
+  "mixture_components": 3,
+  "repeats": 5,
+  "seed": 20261120,
+  "platform": "Windows",
+  "architecture": "AMD64",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "timing_scope": "Uncached scoring of six actions at two monitors per context; 4 regimes x 9 observed pairs.",
+  "storage_scope": "Array payload of all 12 loss operators and all 4 probability models. Excludes workspace and Python object overhead.",
+  "data_preparation_seconds": 0.06347550000282354,
+  "mixture_training_seconds": 0.28656490000139456,
+  "ac_calibration_seconds": 0.01826249999794527,
+  "common_ac_solves": 150,
+  "max_abs_score_difference": 2.7755575615628914e-17,
+  "action_agreement": 1.0,
+  "backends": {
+    "dense": {
+      "operator_bytes": 3155328,
+      "probability_bytes": 9216,
+      "construction_seconds_median": 0.006029500000295229,
+      "seconds_per_evidence_median": 0.009800588888841352
+    },
+    "factorized": {
+      "operator_bytes": 113992,
+      "probability_bytes": 3552,
+      "construction_seconds_median": 0.00013920000128564425,
+      "seconds_per_evidence_median": 0.00010049999996731963
+    }
+  },
+  "online_speedup": 97.51829743311727,
+  "operator_storage_ratio": 27.680258263737805
+}

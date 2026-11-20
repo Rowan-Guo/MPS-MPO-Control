@@ -1,0 +1,221 @@
+{
+  "feeder": "IEEE 33-bus, nominal base_load_scale=0.65 and slack=1.02",
+  "monitors": [
+    18,
+    33
+  ],
+  "deadband_pu": 0.02,
+  "forecast": "specified load-scenario mixture",
+  "scenario_load_multipliers": [
+    0.7,
+    1.0,
+    1.3
+  ],
+  "scenario_weights": [
+    0.2,
+    0.5,
+    0.3
+  ],
+  "tick_pu": 0.0001,
+  "q_step_pu": 0.0125,
+  "max_active_stations": 3,
+  "edge_protocol": "local JSON neighbor messages",
+  "timing": "warm median, per solve, excludes shared calibration and independent AC validation",
+  "timing_repeats": 5,
+  "results": [
+    {
+      "controller_count": 3,
+      "buses": [
+        14,
+        18,
+        33
+      ],
+      "potential_schedules": 8,
+      "feasible_schedules": 8,
+      "reachable_states_per_station": [
+        2,
+        4,
+        8
+      ],
+      "terminal_states": 8,
+      "max_forward_entries": 4,
+      "neighbor_messages": 4,
+      "wire_bytes": 114,
+      "optimal_binned_objective": 0.007070030969146547,
+      "distributed_objective_gap": 0.0,
+      "selected_buses": [
+        14,
+        18,
+        33
+      ],
+      "ac_no_control_loss": 0.015150030969146546,
+      "ac_selected_loss": 0.007068843314762871,
+      "ac_oracle_loss": 0.007068843314762871,
+      "ac_selected_regret": 0.0,
+      "ac_validation_snapshots": 24,
+      "calibration_ac_snapshots": 6,
+      "distributed_seconds": 0.00012789999891538173,
+      "constrained_brute_seconds": 2.269999822601676e-05,
+      "cached_brute_scoring_seconds": 7.599999662488699e-06
+    },
+    {
+      "controller_count": 6,
+      "buses": [
+        14,
+        18,
+        33,
+        6,
+        22,
+        25
+      ],
+      "potential_schedules": 64,
+      "feasible_schedules": 42,
+      "reachable_states_per_station": [
+        2,
+        4,
+        8,
+        15,
+        26,
+        42
+      ],
+      "terminal_states": 42,
+      "max_forward_entries": 26,
+      "neighbor_messages": 10,
+      "wire_bytes": 932,
+      "optimal_binned_objective": 0.007070030969146547,
+      "distributed_objective_gap": 0.0,
+      "selected_buses": [
+        14,
+        18,
+        33
+      ],
+      "ac_no_control_loss": 0.015150030969146546,
+      "ac_selected_loss": 0.007068843314762871,
+      "ac_oracle_loss": 0.007068843314762871,
+      "ac_selected_regret": 0.0,
+      "ac_validation_snapshots": 126,
+      "calibration_ac_snapshots": 9,
+      "distributed_seconds": 0.0002911000010499265,
+      "constrained_brute_seconds": 6.320000102277845e-05,
+      "cached_brute_scoring_seconds": 1.059999704011716e-05
+    },
+    {
+      "controller_count": 12,
+      "buses": [
+        14,
+        18,
+        33,
+        6,
+        22,
+        25,
+        9,
+        11,
+        16,
+        20,
+        28,
+        31
+      ],
+      "potential_schedules": 4096,
+      "feasible_schedules": 299,
+      "reachable_states_per_station": [
+        2,
+        4,
+        8,
+        15,
+        26,
+        42,
+        64,
+        93,
+        130,
+        139,
+        186,
+        243
+      ],
+      "terminal_states": 243,
+      "max_forward_entries": 186,
+      "neighbor_messages": 22,
+      "wire_bytes": 11532,
+      "optimal_binned_objective": 0.006833560728746299,
+      "distributed_objective_gap": 0.0,
+      "selected_buses": [
+        18,
+        33,
+        16
+      ],
+      "ac_no_control_loss": 0.015150030969146546,
+      "ac_selected_loss": 0.006828136372541337,
+      "ac_oracle_loss": 0.006828136372541337,
+      "ac_selected_regret": 0.0,
+      "ac_validation_snapshots": 897,
+      "calibration_ac_snapshots": 15,
+      "distributed_seconds": 0.001833399997849483,
+      "constrained_brute_seconds": 0.0004988000000594184,
+      "cached_brute_scoring_seconds": 2.5800000003073364e-05
+    },
+    {
+      "controller_count": 18,
+      "buses": [
+        14,
+        18,
+        33,
+        6,
+        22,
+        25,
+        9,
+        11,
+        16,
+        20,
+        28,
+        31,
+        3,
+        5,
+        8,
+        12,
+        24,
+        30
+      ],
+      "potential_schedules": 262144,
+      "feasible_schedules": 988,
+      "reachable_states_per_station": [
+        2,
+        4,
+        8,
+        15,
+        26,
+        42,
+        64,
+        93,
+        130,
+        139,
+        186,
+        243,
+        254,
+        323,
+        404,
+        498,
+        498,
+        604
+      ],
+      "terminal_states": 604,
+      "max_forward_entries": 498,
+      "neighbor_messages": 34,
+      "wire_bytes": 47349,
+      "optimal_binned_objective": 0.006833560728746299,
+      "distributed_objective_gap": 0.0,
+      "selected_buses": [
+        18,
+        33,
+        16
+      ],
+      "ac_no_control_loss": 0.015150030969146546,
+      "ac_selected_loss": 0.006828136372541337,
+      "ac_oracle_loss": 0.006828136372541337,
+      "ac_selected_regret": 0.0,
+      "ac_validation_snapshots": 2964,
+      "calibration_ac_snapshots": 21,
+      "distributed_seconds": 0.006707299999106908,
+      "constrained_brute_seconds": 0.0011889999987033661,
+      "cached_brute_scoring_seconds": 6.339999890769832e-05
+    }
+  ]
+}
