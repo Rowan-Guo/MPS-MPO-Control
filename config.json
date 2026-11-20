@@ -1,0 +1,16 @@
+{
+  "slack": 1.0104,
+  "deadband": 0.002,
+  "hard_voltage_limits": [0.95, 1.05],
+  "device_rating": 0.1,
+  "train_samples": 200,
+  "test_samples": 100,
+  "training_pseudocount": 0.5,
+  "seeds": [20261120, 20261121, 20261122, 20261123, 20261124],
+  "target_visible_indices": [0, 1],
+  "target_visible_mass": 0.6,
+  "target_hidden_laws": {
+    "A": [0.01, 0.58, 0.41],
+    "B": [0.29, 0.02, 0.69]
+  }
+}
