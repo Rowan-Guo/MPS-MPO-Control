@@ -196,3 +196,27 @@ python benchmark.py --sites 4 6 10 16 --surrogate lin-distflow \
 下一阶段的研究聚焦：**多工况与多随机种子验证、IEEE 标准配电网、非线性 AC 残差低秩修正、概率漂移适应、条件越限概率与风险约束控制**。
 
 **方法基础：** [Tensor Train Decomposition — Oseledets (2011)](https://doi.org/10.1137/090752286)。
+
+## IEEE 33 节点 + Ausgrid 实测源荷扩展（新）
+
+在原始 10 节点和高维合成馈线实验之外，新增更接近工程场景的评测路径：
+
+- **33 节点分支型 AC 潮流：** 采用 MATPOWER Baran–Wu IEEE 33 节点线路、原始基准负荷与 32 条常闭支路；双逆变器布置在节点 18、33。
+- **实测源荷时序：** Ausgrid 2011-07 至 2012-06 匿名住宅 Customer 12 的 **17,568 条半小时真实负荷 GC / 光伏 GG 记录**，源文件和 CC BY 4.0 署名一并提交至 `data/`。
+- **多点不完全观测：** 12 个随机源荷节点，2 个可观测，**3¹² = 531,441** 种离散状态；按时间段训练非负概率 TT，使用交流潮流校准的 Fourier MPO 条件缩并。
+- **线性数量的校准：** 六种 P/Q 控制动作只需 **150 次离线 AC 潮流**获取两个监控节点的类别灵敏度。
+- **公平的样本外测试：** 训练/测试原始读数严格按时间隔离；比较相关概率 TT、条件均值、独立概率 TT，使用完整 AC 潮流在未见过的连续负荷/PV 注入上评分，并采用按天分组的 bootstrap 区间。
+
+**运行实验：**
+
+```bash
+python -m pip install -r requirements.txt
+python -m unittest discover -v
+python realistic_benchmark.py --harmonics 16 --components 3 --max-test 320 \
+  --out examples/ieee33_ausgrid_results.json
+```
+
+[详细方法与实验说明](docs/ieee33_ausgrid.md) · [数据来源与许可](data/README.md)
+
+源荷曲线是实际测量；**节点级注入是将一户实测曲线通过分日期时移和容量缩放映射至 IEEE 33 节点的场景**，并非 33 个实测用户或真实运行中同一配电网的现场注入。
+

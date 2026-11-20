@@ -1,0 +1,33 @@
+name: IEEE33 Ausgrid reproducible benchmark
+on:
+  push:
+    paths:
+      - 'feeder33.py'
+      - 'measured_profiles.py'
+      - 'realistic_benchmark.py'
+      - 'test_realistic.py'
+      - 'data/**'
+      - '.github/workflows/realistic.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test-and-benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r requirements.txt
+      - name: Unit tests
+        run: python -m unittest discover -v
+      - name: Measured-data benchmark
+        run: |
+          python realistic_benchmark.py --harmonics 16 --components 3 --max-test 320 --out examples/ieee33_ausgrid_results.json
+          cat examples/ieee33_ausgrid_results.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ieee33-ausgrid-results
+          path: examples/ieee33_ausgrid_results.json
