@@ -1,5 +1,7 @@
 import itertools
+import json
 import unittest
+from unittest.mock import patch
 
 import numpy as np
 
@@ -59,6 +61,25 @@ class TestDistributedDispatch(unittest.TestCase):
         self.assertTrue(np.all(np.array(actual.diagnostics['resources_used']) <= [2, 3]))
         physical = np.sum([s.voltage_shifts[i] for s, i in zip(stations, actual.action_indices)], axis=0)
         self.assertLessEqual(np.max(np.abs(physical - actual.voltage_shift)), len(stations)*tick/2)
+
+    def test_full_feeder_messages_preserve_choices_and_raw_byte_accounting(self):
+        voltage = np.linspace(-.003, .006, 69)
+        stations = [Station(bus, [(0, 0), (0, .01), (0, -.01)],
+                            np.stack([voltage*0, voltage*scale, -voltage*scale]),
+                            [0, 0, 0], resources=[[0], [1], [1]])
+                    for bus, scale in [(11, .7), (27, .9), (65, 1.1)]]
+        def loss(shifts):
+            return np.abs(shifts - voltage*1.65).mean(axis=1)
+        def uncompressed(payload):
+            return json.dumps(payload, separators=(",", ":"), allow_nan=False).encode()
+        with patch("distributed._encode", uncompressed):
+            raw = solve_dispatch(stations, loss, resource_limits=(2,))
+        for transport in ("local", "process"):
+            packed = solve_dispatch(stations, loss, resource_limits=(2,), transport=transport)
+            self.assertEqual(raw.actions, packed.actions)
+            self.assertEqual(raw.objective, packed.objective)
+            self.assertEqual(raw.diagnostics["wire_bytes"], packed.diagnostics["raw_wire_bytes"])
+            self.assertLess(packed.diagnostics["wire_bytes"], packed.diagnostics["raw_wire_bytes"])
 
     def test_infeasible_is_an_error(self):
         s = Station(3, [(0,0)], [[0]], [0], resources=[[2]])

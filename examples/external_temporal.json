@@ -1,0 +1,709 @@
+{
+  "design": "Same household, subsequent measured year. Known grid/operating condition; scenario-scaled nodal PQ.",
+  "fitting": "Each condition uses only the original training window for thresholds, MPS, voltage response and control calibration.",
+  "scoring": "Each case and interval has equal weight. Bootstrap paired differences by date after averaging cases.",
+  "seed": 20261120,
+  "harmonics": 16,
+  "site_lags_days": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    15,
+    18,
+    21,
+    24,
+    27,
+    30,
+    33
+  ],
+  "gross_reference_kw": 0.514,
+  "pv_reference_kw": 0.662,
+  "training_intervals": 7680,
+  "training_first": "2011-07-01T00:00",
+  "training_last": "2011-12-07T23:30",
+  "last_raw_training": "2012-01-09T23:30",
+  "external_intervals_per_case": 15936,
+  "external_days_per_case": 332,
+  "external_first": "2012-07-01T00:00",
+  "external_last": "2013-05-28T23:30",
+  "external_last_raw": "2013-06-30T23:30",
+  "cases": 2,
+  "topologies": {
+    "ieee33": {
+      "cases": [
+        {
+          "intervals": 15936,
+          "no_current_report_intervals": 2284,
+          "reports_received_by_bus": {
+            "8": 13652,
+            "30": 13652
+          },
+          "never_metered_buses": [
+            5,
+            6,
+            11,
+            14,
+            17,
+            18,
+            23,
+            24,
+            25,
+            33
+          ],
+          "methods": {
+            "memoryless": {
+              "mean_monitor_loss": 6.330032200614928e-05,
+              "p95_monitor_loss": 0.0,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9631649908832632,
+              "max_voltage": 1.0207228965126103,
+              "pre_report_meter_nll": 0.7974225035340384,
+              "post_report_hidden_site_nll": 0.7981785991448304,
+              "distinct_contexts": 40,
+              "lag_half_hours": 0,
+              "intervals_with_lagged_report": 0
+            },
+            "half_hour": {
+              "mean_monitor_loss": 6.328629040946089e-05,
+              "p95_monitor_loss": 0.0,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9631649908832632,
+              "max_voltage": 1.0213248896273155,
+              "pre_report_meter_nll": 0.6771915862531878,
+              "post_report_hidden_site_nll": 0.7955716382685021,
+              "distinct_contexts": 415,
+              "lag_half_hours": 1,
+              "intervals_with_lagged_report": 13652
+            },
+            "previous_day": {
+              "mean_monitor_loss": 6.59086770924146e-05,
+              "p95_monitor_loss": 0.0,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9631649908832632,
+              "max_voltage": 1.022629615604696,
+              "pre_report_meter_nll": 0.7394938662738914,
+              "post_report_hidden_site_nll": 0.786040776687477,
+              "distinct_contexts": 356,
+              "lag_half_hours": 48,
+              "intervals_with_lagged_report": 13632
+            }
+          },
+          "paired_improvement_over_memoryless": {
+            "half_hour": {
+              "mean_monitor_loss": {
+                "mean": 1.4031596688403181e-08,
+                "day_block_ci95": [
+                  -1.672924722403883e-07,
+                  2.0790208726879993e-07
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    -1.67327978822817e-07,
+                    2.0782328750448613e-07
+                  ],
+                  "34": [
+                    -1.6472887783416183e-07,
+                    2.26833956399963e-07
+                  ]
+                }
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    0.0,
+                    0.0
+                  ],
+                  "34": [
+                    0.0,
+                    0.0
+                  ]
+                }
+              },
+              "pre_report_meter_nll": {
+                "mean": 0.12023091728085067,
+                "day_block_ci95": [
+                  0.11534687293518289,
+                  0.12480601611297451
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    0.11607224589587062,
+                    0.12422038196259907
+                  ],
+                  "34": [
+                    0.11485966608735441,
+                    0.12506533049008978
+                  ]
+                }
+              },
+              "post_report_hidden_site_nll": {
+                "mean": 0.002606960876328145,
+                "day_block_ci95": [
+                  0.0021725618410725882,
+                  0.0031752673377684485
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    0.0020917518792112496,
+                    0.0031266254326622936
+                  ],
+                  "34": [
+                    0.0019952142028936267,
+                    0.003183090031108154
+                  ]
+                }
+              },
+              "changed_dispatch_intervals": 1379
+            },
+            "previous_day": {
+              "mean_monitor_loss": {
+                "mean": -2.6083550862653053e-06,
+                "day_block_ci95": [
+                  -3.771658711755612e-06,
+                  -1.54302275597224e-06
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    -4.195922984160644e-06,
+                    -1.441475221490753e-06
+                  ],
+                  "34": [
+                    -4.953790397267676e-06,
+                    -9.357707662784674e-07
+                  ]
+                }
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    0.0,
+                    0.0
+                  ],
+                  "34": [
+                    0.0,
+                    0.0
+                  ]
+                }
+              },
+              "pre_report_meter_nll": {
+                "mean": 0.05792863726014704,
+                "day_block_ci95": [
+                  0.05431585026828105,
+                  0.06124886898097901
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    0.053034384382558995,
+                    0.0629250799192829
+                  ],
+                  "34": [
+                    0.04859281324739976,
+                    0.06654692444983597
+                  ]
+                }
+              },
+              "post_report_hidden_site_nll": {
+                "mean": 0.012137822457353464,
+                "day_block_ci95": [
+                  0.010887103502961357,
+                  0.013381486668318985
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    0.011077317412311638,
+                    0.013252063575158348
+                  ],
+                  "34": [
+                    0.010048420332924425,
+                    0.014172053905909584
+                  ]
+                }
+              },
+              "changed_dispatch_intervals": 3008
+            }
+          },
+          "during_blackout": {
+            "memoryless": {
+              "mean_monitor_loss": 8.035315009831633e-05,
+              "all_bus_unsafe_fraction": 0.0,
+              "pre_report_meter_nll": 0.7705609749764591,
+              "post_report_hidden_site_nll": 0.8489342604315916,
+              "intervals_with_lagged_report": 0
+            },
+            "half_hour": {
+              "mean_monitor_loss": 8.035315009831633e-05,
+              "all_bus_unsafe_fraction": 0.0,
+              "pre_report_meter_nll": 0.7672197701648976,
+              "post_report_hidden_site_nll": 0.8485088117605204,
+              "intervals_with_lagged_report": 48
+            },
+            "previous_day": {
+              "mean_monitor_loss": 8.04613811673962e-05,
+              "all_bus_unsafe_fraction": 0.0,
+              "pre_report_meter_nll": 0.6882568235641374,
+              "post_report_hidden_site_nll": 0.8088100565593838,
+              "intervals_with_lagged_report": 2284
+            }
+          },
+          "condition": "nominal",
+          "pv_scale": 1.5,
+          "load_scale": 0.65,
+          "slack": 1.02
+        }
+      ],
+      "state_buses": [
+        5,
+        6,
+        8,
+        11,
+        14,
+        17,
+        18,
+        23,
+        24,
+        25,
+        30,
+        33
+      ],
+      "pcc_buses": [
+        14,
+        18,
+        33
+      ],
+      "monitor_buses": [
+        18,
+        33
+      ]
+    },
+    "case69": {
+      "cases": [
+        {
+          "intervals": 15936,
+          "no_current_report_intervals": 2284,
+          "reports_received_by_bus": {
+            "12": 13652,
+            "64": 13652
+          },
+          "never_metered_buses": [
+            8,
+            11,
+            16,
+            18,
+            21,
+            24,
+            49,
+            50,
+            61,
+            65
+          ],
+          "methods": {
+            "memoryless": {
+              "mean_monitor_loss": 0.0008239639990285523,
+              "p95_monitor_loss": 0.0052600321827396355,
+              "all_bus_unsafe_fraction": 0.010040160642570281,
+              "all_bus_undervoltage_fraction": 0.010040160642570281,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.027129378562946393,
+              "min_voltage": 0.9228706214370536,
+              "max_voltage": 1.0276571495787412,
+              "pre_report_meter_nll": 0.7974225035340384,
+              "post_report_hidden_site_nll": 0.7981785991448304,
+              "distinct_contexts": 40,
+              "lag_half_hours": 0,
+              "intervals_with_lagged_report": 0
+            },
+            "half_hour": {
+              "mean_monitor_loss": 0.0008239881755084006,
+              "p95_monitor_loss": 0.0052600321827396355,
+              "all_bus_unsafe_fraction": 0.010040160642570281,
+              "all_bus_undervoltage_fraction": 0.010040160642570281,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.027129378562946393,
+              "min_voltage": 0.9228706214370536,
+              "max_voltage": 1.0276571495787412,
+              "pre_report_meter_nll": 0.6771915862531878,
+              "post_report_hidden_site_nll": 0.7955716382685021,
+              "distinct_contexts": 415,
+              "lag_half_hours": 1,
+              "intervals_with_lagged_report": 13652
+            },
+            "previous_day": {
+              "mean_monitor_loss": 0.0008239646600793298,
+              "p95_monitor_loss": 0.0052600321827396355,
+              "all_bus_unsafe_fraction": 0.010040160642570281,
+              "all_bus_undervoltage_fraction": 0.010040160642570281,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.027129378562946393,
+              "min_voltage": 0.9228706214370536,
+              "max_voltage": 1.0276571495787412,
+              "pre_report_meter_nll": 0.7394938662738914,
+              "post_report_hidden_site_nll": 0.786040776687477,
+              "distinct_contexts": 356,
+              "lag_half_hours": 48,
+              "intervals_with_lagged_report": 13632
+            }
+          },
+          "paired_improvement_over_memoryless": {
+            "half_hour": {
+              "mean_monitor_loss": {
+                "mean": -2.417647984842544e-08,
+                "day_block_ci95": [
+                  -7.239806569834236e-08,
+                  0.0
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    -7.24670369679827e-08,
+                    0.0
+                  ],
+                  "34": [
+                    -7.226669185140839e-08,
+                    0.0
+                  ]
+                }
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    0.0,
+                    0.0
+                  ],
+                  "34": [
+                    0.0,
+                    0.0
+                  ]
+                }
+              },
+              "pre_report_meter_nll": {
+                "mean": 0.12023091728085067,
+                "day_block_ci95": [
+                  0.11534687293518289,
+                  0.12480601611297451
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    0.11607224589587062,
+                    0.12422038196259907
+                  ],
+                  "34": [
+                    0.11485966608735441,
+                    0.12506533049008978
+                  ]
+                }
+              },
+              "post_report_hidden_site_nll": {
+                "mean": 0.002606960876328145,
+                "day_block_ci95": [
+                  0.0021725618410725882,
+                  0.0031752673377684485
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    0.0020917518792112496,
+                    0.0031266254326622936
+                  ],
+                  "34": [
+                    0.0019952142028936267,
+                    0.003183090031108154
+                  ]
+                }
+              },
+              "changed_dispatch_intervals": 135
+            },
+            "previous_day": {
+              "mean_monitor_loss": {
+                "mean": -6.610507774401219e-10,
+                "day_block_ci95": [
+                  -1.3234752694770927e-09,
+                  -1.3227035883635501e-10
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    -1.3198898593567987e-09,
+                    -1.3219699974228794e-10
+                  ],
+                  "34": [
+                    -1.0602789332297699e-09,
+                    -2.630863102651752e-10
+                  ]
+                }
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    0.0,
+                    0.0
+                  ],
+                  "34": [
+                    0.0,
+                    0.0
+                  ]
+                }
+              },
+              "pre_report_meter_nll": {
+                "mean": 0.05792863726014704,
+                "day_block_ci95": [
+                  0.05431585026828105,
+                  0.06124886898097901
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    0.053034384382558995,
+                    0.0629250799192829
+                  ],
+                  "34": [
+                    0.04859281324739976,
+                    0.06654692444983597
+                  ]
+                }
+              },
+              "post_report_hidden_site_nll": {
+                "mean": 0.012137822457353464,
+                "day_block_ci95": [
+                  0.010887103502961357,
+                  0.013381486668318985
+                ],
+                "moving_block_ci95_by_days": {
+                  "7": [
+                    0.011077317412311638,
+                    0.013252063575158348
+                  ],
+                  "34": [
+                    0.010048420332924425,
+                    0.014172053905909584
+                  ]
+                }
+              },
+              "changed_dispatch_intervals": 99
+            }
+          },
+          "during_blackout": {
+            "memoryless": {
+              "mean_monitor_loss": 0.0009098564233101756,
+              "all_bus_unsafe_fraction": 0.013134851138353765,
+              "pre_report_meter_nll": 0.7705609749764591,
+              "post_report_hidden_site_nll": 0.8489342604315916,
+              "intervals_with_lagged_report": 0
+            },
+            "half_hour": {
+              "mean_monitor_loss": 0.0009098564233101756,
+              "all_bus_unsafe_fraction": 0.013134851138353765,
+              "pre_report_meter_nll": 0.7672197701648976,
+              "post_report_hidden_site_nll": 0.8485088117605204,
+              "intervals_with_lagged_report": 48
+            },
+            "previous_day": {
+              "mean_monitor_loss": 0.0009098564233101756,
+              "all_bus_unsafe_fraction": 0.013134851138353765,
+              "pre_report_meter_nll": 0.6882568235641374,
+              "post_report_hidden_site_nll": 0.8088100565593838,
+              "intervals_with_lagged_report": 2284
+            }
+          },
+          "condition": "nominal",
+          "pv_scale": 1.5,
+          "load_scale": 0.65,
+          "slack": 1.02
+        }
+      ],
+      "state_buses": [
+        8,
+        11,
+        12,
+        16,
+        18,
+        21,
+        24,
+        49,
+        50,
+        61,
+        64,
+        65
+      ],
+      "pcc_buses": [
+        21,
+        27,
+        65
+      ],
+      "monitor_buses": [
+        27,
+        65
+      ]
+    }
+  },
+  "mode": "Primary: nominal feeder with intermittent category blackout.",
+  "history_initialization": "Empty buffer at the first external interval.",
+  "macro_memoryless_minus_lag": {
+    "half_hour": {
+      "mean_monitor_loss": {
+        "mean": -5.07244158001113e-09,
+        "day_block_ci95": [
+          -1.0030712944979021e-07,
+          9.147455683467253e-08
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            -9.932144337626744e-08,
+            9.30315520043058e-08
+          ],
+          "34": [
+            -9.297677597183681e-08,
+            1.0969767236485882e-07
+          ]
+        }
+      },
+      "all_bus_unsafe_fraction": {
+        "mean": 0.0,
+        "day_block_ci95": [
+          0.0,
+          0.0
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            0.0,
+            0.0
+          ],
+          "34": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "pre_report_meter_nll": {
+        "mean": 0.12023091728085067,
+        "day_block_ci95": [
+          0.11534687293518289,
+          0.12480601611297451
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            0.11607224589587062,
+            0.12422038196259907
+          ],
+          "34": [
+            0.11485966608735441,
+            0.12506533049008978
+          ]
+        }
+      },
+      "post_report_hidden_site_nll": {
+        "mean": 0.002606960876328145,
+        "day_block_ci95": [
+          0.0021725618410725882,
+          0.0031752673377684485
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            0.0020917518792112496,
+            0.0031266254326622936
+          ],
+          "34": [
+            0.0019952142028936267,
+            0.003183090031108154
+          ]
+        }
+      }
+    },
+    "previous_day": {
+      "mean_monitor_loss": {
+        "mean": -1.3045080685213727e-06,
+        "day_block_ci95": [
+          -1.8860286090045218e-06,
+          -7.721061381004122e-07
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            -2.098221919810465e-06,
+            -7.210676685748537e-07
+          ],
+          "34": [
+            -2.4772969886767006e-06,
+            -4.6811540042174615e-07
+          ]
+        }
+      },
+      "all_bus_unsafe_fraction": {
+        "mean": 0.0,
+        "day_block_ci95": [
+          0.0,
+          0.0
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            0.0,
+            0.0
+          ],
+          "34": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "pre_report_meter_nll": {
+        "mean": 0.05792863726014704,
+        "day_block_ci95": [
+          0.05431585026828105,
+          0.06124886898097901
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            0.053034384382558995,
+            0.0629250799192829
+          ],
+          "34": [
+            0.04859281324739976,
+            0.06654692444983597
+          ]
+        }
+      },
+      "post_report_hidden_site_nll": {
+        "mean": 0.012137822457353464,
+        "day_block_ci95": [
+          0.010887103502961357,
+          0.013381486668318985
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            0.011077317412311638,
+            0.013252063575158348
+          ],
+          "34": [
+            0.010048420332924425,
+            0.014172053905909584
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 """Ausgrid Customer 12 measured gross consumption / rooftop PV + IEEE33 mapping.
 
-Source: Ausgrid Solar Home Electricity Data (CC BY 4.0), 2011--2012,
-curated by Pierre Haessig in the solarhome-control-bench project.
+Source: Ausgrid Solar Home Electricity Data (CC BY 3.0 Australia), 2011--2012,
+curated by Pierre Haessig in solarhome-control-bench (CC BY 4.0 extraction).
 The *measured* data contains only one household: the mapping across feeder
 nodes uses different-day lags and explicit scaling, hence site-level loads are
 scenario constructions, not metered IEEE33 node injections.
@@ -41,8 +41,19 @@ def read_ausgrid(path=DATA_PATH):
     return np.array(dates,dtype='datetime64[m]'),np.asarray(gross),np.asarray(pv)
 
 
+def profile_scales(gross, pv):
+    """Estimate fixed source-power scales from the first 160 training days."""
+    gross = np.asarray(gross, dtype=float)[:160*48]
+    pv = np.asarray(pv, dtype=float)[:160*48]
+    if (gross.ndim != 1 or gross.shape != pv.shape or not len(gross)
+            or not np.isfinite(gross).all() or not np.isfinite(pv).all()
+            or gross.min() < 0 or pv.min() < 0):
+        raise ValueError("source power scales require finite nonnegative observations")
+    return max(float(np.median(gross)), .1), max(float(np.quantile(pv, .95)), .1)
+
+
 def construct_profiles(gross,pv,feeder=Feeder33(),*,sites=SITES,day_lags=DAY_LAGS,
-                       solar_scale=1.5,load_clip=3.5):
+                       solar_scale=1.5,load_clip=3.5,reference_scales=None):
     """Translate real home GC/GG measurements to scenario nodal PQ trajectories.
 
     All site profiles use real paired GC/GG intervals, with whole-day offsets
@@ -50,21 +61,22 @@ def construct_profiles(gross,pv,feeder=Feeder33(),*,sites=SITES,day_lags=DAY_LAG
     Each site has local load and optional rooftop PV generation (unity PF PV).
     """
     gross=np.asarray(gross,dtype=float);pv=np.asarray(pv,dtype=float)
-    if gross.shape!=pv.shape or gross.ndim!=1 or len(gross)<200 or np.any(gross<0) or np.any(pv<0):
+    if (gross.shape!=pv.shape or gross.ndim!=1 or len(gross)<200
+            or not np.isfinite(gross).all() or not np.isfinite(pv).all()
+            or np.any(gross<0) or np.any(pv<0)):
         raise ValueError('invalid measured profiles')
     if len(sites)!=len(day_lags) or len(set(sites))!=len(sites):
         raise ValueError('site mapping must have unique sites and a lag per site')
-    if not all(2<=i<=33 for i in sites) or min(day_lags)<0 or not np.isfinite(solar_scale):
+    base=feeder.nominal_pq
+    if len(sites)==0 or not all(2<=i<=len(base) for i in sites) or min(day_lags)<0 or not np.isfinite(solar_scale):
         raise ValueError('invalid sites, lag or solar scale')
     total=len(gross)-48*max(day_lags)
     if total<=0:raise ValueError('insufficient measured time horizon')
-    # All normalization constants estimated from the *early* 160 measured days.
-    # The caller uses a strict train/test time split, avoiding future leakage.
-    ref_end=min(len(gross),160*48)
-    gross_ref=max(float(np.median(gross[:ref_end])),0.1)
-    pv_ref=max(float(np.quantile(pv[:ref_end],0.95)),0.1)
-    base=feeder.nominal_pq
-    loads=np.broadcast_to(base,(total,33,2)).copy()
+    scales = profile_scales(gross,pv) if reference_scales is None else np.asarray(reference_scales)
+    if np.shape(scales)!=(2,) or not np.isfinite(scales).all() or np.any(np.asarray(scales)<=0):
+        raise ValueError("require two positive, finite source-power scales")
+    gross_ref,pv_ref=scales
+    loads=np.broadcast_to(base,(total,*base.shape)).copy()
     for j,(bus,lag) in enumerate(zip(sites,day_lags,strict=True)):
         src=slice(48*lag,48*lag+total)
         demand_factor=0.45+0.55*np.clip(gross[src]/gross_ref,0,load_clip)

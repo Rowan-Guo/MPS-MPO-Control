@@ -59,13 +59,13 @@ SCENARIOS = (
 )
 
 
-def station_tables(feeder, reference_loads, scenario):
+def station_tables(feeder, reference_loads, scenario, *, control_buses=CONTROL_BUSES):
     """Exact one-station AC response at the common reference operating point."""
     base = np.abs(feeder.ac(reference_loads))
     stations = []
-    for bus in CONTROL_BUSES:
+    for bus in control_buses:
         grid = [(p, q) for p, q in LOCAL_GRID
-                if not (bus == 33 and scenario.reactive_limit_33 and q > 0)]
+                if not (bus == control_buses[-1] and scenario.reactive_limit_33 and q > 0)]
         actions = [(p * STEP, q * STEP) for p, q in grid]
         injections = np.repeat(reference_loads[None], len(actions), axis=0)
         injections[:, bus - 1] -= actions
@@ -90,11 +90,15 @@ def reference_actions(stations, tick):
     return options, shift * tick
 
 
-def feasible_equal_splits(stations, tick):
+def feasible_equal_splits(stations, tick, *, reference_buses=(18, 33)):
     """Map the six legacy presets to local action indices; enforce live PCC limits."""
+    if (not reference_buses or len(set(reference_buses)) != len(reference_buses)
+            or not set(reference_buses).issubset(s.bus for s in stations)):
+        raise ValueError("reference buses must be distinct controllable stations")
     choices, original_indices, shifts = [], [], []
     for j, (p, q) in enumerate(ACTIONS):
-        target = [(p / 2, q / 2) if s.bus in (18, 33) else (0., 0.) for s in stations]
+        targets = {bus: (dp, dq) for bus, dp, dq in action_injections((p, q), reference_buses)}
+        target = [targets.get(s.bus, (0., 0.)) for s in stations]
         try:
             choice = tuple(list(map(tuple, s.actions)).index(pair)
                            for s, pair in zip(stations, target, strict=True))
@@ -214,10 +218,10 @@ def paired_safety_guard(reference_shift, reference_voltages):
     return penalty
 
 
-def risk_functions(op, fit, evidence, training_voltages, matching, bucket_rows):
+def risk_functions(op, fit, evidence, training_voltages, matching, bucket_rows, *, monitored=MONITORED):
     """Condition both estimators on identical telemetry, with a fixed TT prior."""
     evaluator = op.shift_evaluator(fit["weights"], fit["local_probabilities"], evidence)
-    monitors = np.asarray(MONITORED) - 1
+    monitors = np.asarray(monitored) - 1
     def prior(shifts):
         return evaluator(np.asarray(shifts)[:, None, monitors])[:, 0, :].mean(axis=1)
 
@@ -253,16 +257,17 @@ class ContextRisk:
     envelope_cases: int
 
 
-def reference_magnitude_table(feeder, training_powers):
+def reference_magnitude_table(feeder, training_powers, *, reference_buses=(18, 33)):
     """Offline AC calibration on training intervals only (six shared baselines)."""
-    return {j: np.abs(feeder.ac_batch(training_powers, actions=action_injections(a)))
+    return {j: np.abs(feeder.ac_batch(training_powers, actions=action_injections(a, reference_buses)))
             for j, a in enumerate(ACTIONS)}
 
 
 def context_risk(stations, fixed_op, op, fit, evidence, states,
-                 training_reference_magnitudes, training_buckets, bucket, tick):
+                 training_reference_magnitudes, training_buckets, bucket, tick, *,
+                 monitored=MONITORED, reference_buses=(18, 33)):
     """Prepare terminal costs for one evidence state without visiting joint actions."""
-    original_ids, choices, shifts = feasible_equal_splits(stations, tick)
+    original_ids, choices, shifts = feasible_equal_splits(stations, tick, reference_buses=reference_buses)
     scores = fixed_op.scores(fit["weights"], fit["local_probabilities"], evidence).mean(axis=1)
     ref = np.argmin(scores[original_ids])
     prior_rows = training_buckets == bucket
@@ -273,7 +278,7 @@ def context_risk(stations, fixed_op, op, fit, evidence, states,
         matching &= states[:, site] == category
     training_voltages = training_reference_magnitudes[ACTIONS.index((0.,0.))] - 1
     soft, combined, model, empirical, guard = risk_functions(op, fit, evidence, training_voltages,
-                                                            matching, prior_rows)
+                                                            matching, prior_rows, monitored=monitored)
     rows = matching if np.any(matching) else prior_rows
     reference = training_reference_magnitudes[original_ids[ref]][rows]
     envelope = reference_envelope(shifts[ref], reference)
@@ -286,11 +291,11 @@ def context_risk(stations, fixed_op, op, fit, evidence, states,
                        tuple(map(int, choices[ref])), len(reference))
 
 
-def build_shift_operator(c, f, stations, tick, harmonics):
+def build_shift_operator(c, f, stations, tick, harmonics, *, monitored=MONITORED):
     """Bound the Fourier interval from local shifts without joint enumeration."""
     hi = sum(np.rint(np.asarray(s.voltage_shifts) / tick).max(axis=0) * tick for s in stations)
     lo = sum(np.rint(np.asarray(s.voltage_shifts) / tick).min(axis=0) * tick for s in stations)
-    monitors = np.asarray(MONITORED) - 1
+    monitors = np.asarray(monitored) - 1
     bound = max(abs(c + lo[monitors] + f.min(axis=2).sum(axis=1)).max(),
                 abs(c + hi[monitors] + f.max(axis=2).sum(axis=1)).max())
     return FactorizedFourier(c[None], f[None], DEADBAND, harmonics,

@@ -1,0 +1,584 @@
+{
+  "seed": 20261120,
+  "scenario": "solar_export",
+  "load_scale": 0.65,
+  "pv_scale": 7.5,
+  "slack": 1.045,
+  "test_days": 115,
+  "cases": {
+    "ieee33": {
+      "half_hour": {
+        "metrics": {
+          "true": {
+            "mean_monitor_loss": 0.0012800141134143152,
+            "p95_monitor_loss": 0.010092654356318018,
+            "all_bus_unsafe_fraction": 0.02391304347826087,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.02391304347826087,
+            "worst_all_bus_limit_excess": 0.00902910745318275,
+            "min_voltage": 0.9613111977521495,
+            "max_voltage": 1.0590291074531828,
+            "pre_report_meter_nll": 0.5708323724358958
+          },
+          "placebo": {
+            "mean_monitor_loss": 0.001279370137109664,
+            "p95_monitor_loss": 0.010092654356318018,
+            "all_bus_unsafe_fraction": 0.02391304347826087,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.02391304347826087,
+            "worst_all_bus_limit_excess": 0.00902910745318275,
+            "min_voltage": 0.9613111977521495,
+            "max_voltage": 1.0590291074531828,
+            "pre_report_meter_nll": 0.7092548075014885
+          }
+        },
+        "true_minus_placebo": {
+          "mean_monitor_loss": {
+            "mean": 6.439763046511096e-07,
+            "day_block_ci95": [
+              -1.6295257337518647e-06,
+              3.528882557259304e-06
+            ],
+            "moving_block_ci95_by_days": {
+              "7": [
+                -1.057504685460305e-06,
+                2.458870358203399e-06
+              ],
+              "34": [
+                -6.741582257417889e-07,
+                1.8761534943781267e-06
+              ]
+            }
+          },
+          "all_bus_unsafe_fraction": {
+            "mean": 0.0,
+            "day_block_ci95": [
+              0.0,
+              0.0
+            ],
+            "moving_block_ci95_by_days": {
+              "7": [
+                0.0,
+                0.0
+              ],
+              "34": [
+                0.0,
+                0.0
+              ]
+            }
+          },
+          "pre_report_meter_nll": {
+            "mean": -0.13842243506559274,
+            "day_block_ci95": [
+              -0.15176633837483286,
+              -0.125276304582002
+            ],
+            "moving_block_ci95_by_days": {
+              "7": [
+                -0.15334155554021134,
+                -0.1218389632363112
+              ],
+              "34": [
+                -0.1563658850022245,
+                -0.1242076211333467
+              ]
+            }
+          }
+        },
+        "changed_dispatch_intervals": 491,
+        "shared_unique_contexts": 274,
+        "lag_half_hours": 1,
+        "intervals": 5520,
+        "received_history_intervals": 5519
+      },
+      "previous_day": {
+        "metrics": {
+          "true": {
+            "mean_monitor_loss": 0.0012823015142665228,
+            "p95_monitor_loss": 0.010092654356318018,
+            "all_bus_unsafe_fraction": 0.02391304347826087,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.02391304347826087,
+            "worst_all_bus_limit_excess": 0.00902910745318275,
+            "min_voltage": 0.9613111977521495,
+            "max_voltage": 1.0590291074531828,
+            "pre_report_meter_nll": 0.6220616326388233
+          },
+          "placebo": {
+            "mean_monitor_loss": 0.0012815235665827865,
+            "p95_monitor_loss": 0.010092654356318018,
+            "all_bus_unsafe_fraction": 0.02391304347826087,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.02391304347826087,
+            "worst_all_bus_limit_excess": 0.00902910745318275,
+            "min_voltage": 0.9613111977521495,
+            "max_voltage": 1.0590291074531828,
+            "pre_report_meter_nll": 0.684825663129398
+          }
+        },
+        "true_minus_placebo": {
+          "mean_monitor_loss": {
+            "mean": 7.779476837362816e-07,
+            "day_block_ci95": [
+              -1.4340995402517216e-07,
+              1.9625100457698722e-06
+            ],
+            "moving_block_ci95_by_days": {
+              "7": [
+                -1.8729333735400293e-07,
+                1.6968340224104554e-06
+              ],
+              "34": [
+                1.2597716754484284e-07,
+                1.4786421402351616e-06
+              ]
+            }
+          },
+          "all_bus_unsafe_fraction": {
+            "mean": 0.0,
+            "day_block_ci95": [
+              0.0,
+              0.0
+            ],
+            "moving_block_ci95_by_days": {
+              "7": [
+                0.0,
+                0.0
+              ],
+              "34": [
+                0.0,
+                0.0
+              ]
+            }
+          },
+          "pre_report_meter_nll": {
+            "mean": -0.0627640304905747,
+            "day_block_ci95": [
+              -0.07126922632772367,
+              -0.05254848900030842
+            ],
+            "moving_block_ci95_by_days": {
+              "7": [
+                -0.07401167075086872,
+                -0.0512922514039589
+              ],
+              "34": [
+                -0.07988490048701725,
+                -0.04609859984860868
+              ]
+            }
+          }
+        },
+        "changed_dispatch_intervals": 340,
+        "shared_unique_contexts": 216,
+        "lag_half_hours": 48,
+        "intervals": 5520,
+        "received_history_intervals": 5472
+      }
+    },
+    "case69": {
+      "half_hour": {
+        "metrics": {
+          "true": {
+            "mean_monitor_loss": 0.00332910194907275,
+            "p95_monitor_loss": 0.017868371740763597,
+            "all_bus_unsafe_fraction": 0.02826086956521739,
+            "all_bus_undervoltage_fraction": 0.0010869565217391304,
+            "all_bus_overvoltage_fraction": 0.02717391304347826,
+            "worst_all_bus_limit_excess": 0.013724784062933537,
+            "min_voltage": 0.9375301929829016,
+            "max_voltage": 1.0637247840629336,
+            "pre_report_meter_nll": 0.5708323724358958
+          },
+          "placebo": {
+            "mean_monitor_loss": 0.0033284042980064165,
+            "p95_monitor_loss": 0.017868371740763597,
+            "all_bus_unsafe_fraction": 0.02826086956521739,
+            "all_bus_undervoltage_fraction": 0.0010869565217391304,
+            "all_bus_overvoltage_fraction": 0.02717391304347826,
+            "worst_all_bus_limit_excess": 0.013724784062933537,
+            "min_voltage": 0.9375301929829016,
+            "max_voltage": 1.0637247840629336,
+            "pre_report_meter_nll": 0.7092548075014885
+          }
+        },
+        "true_minus_placebo": {
+          "mean_monitor_loss": {
+            "mean": 6.976510663332192e-07,
+            "day_block_ci95": [
+              -1.484801680864736e-07,
+              1.8154163907213483e-06
+            ],
+            "moving_block_ci95_by_days": {
+              "7": [
+                -2.7635367564066645e-07,
+                1.973924415100247e-06
+              ],
+              "34": [
+                -2.1856416260976782e-07,
+                2.0355662995059754e-06
+              ]
+            }
+          },
+          "all_bus_unsafe_fraction": {
+            "mean": 0.0,
+            "day_block_ci95": [
+              0.0,
+              0.0
+            ],
+            "moving_block_ci95_by_days": {
+              "7": [
+                0.0,
+                0.0
+              ],
+              "34": [
+                0.0,
+                0.0
+              ]
+            }
+          },
+          "pre_report_meter_nll": {
+            "mean": -0.13842243506559274,
+            "day_block_ci95": [
+              -0.15176633837483286,
+              -0.125276304582002
+            ],
+            "moving_block_ci95_by_days": {
+              "7": [
+                -0.15334155554021134,
+                -0.1218389632363112
+              ],
+              "34": [
+                -0.1563658850022245,
+                -0.1242076211333467
+              ]
+            }
+          }
+        },
+        "changed_dispatch_intervals": 306,
+        "shared_unique_contexts": 274,
+        "lag_half_hours": 1,
+        "intervals": 5520,
+        "received_history_intervals": 5519
+      },
+      "previous_day": {
+        "metrics": {
+          "true": {
+            "mean_monitor_loss": 0.003329357910422853,
+            "p95_monitor_loss": 0.017868371740763597,
+            "all_bus_unsafe_fraction": 0.02826086956521739,
+            "all_bus_undervoltage_fraction": 0.0010869565217391304,
+            "all_bus_overvoltage_fraction": 0.02717391304347826,
+            "worst_all_bus_limit_excess": 0.013724784062933537,
+            "min_voltage": 0.9375301929829016,
+            "max_voltage": 1.0637247840629336,
+            "pre_report_meter_nll": 0.6220616326388233
+          },
+          "placebo": {
+            "mean_monitor_loss": 0.00333173146798452,
+            "p95_monitor_loss": 0.017868371740763597,
+            "all_bus_unsafe_fraction": 0.02826086956521739,
+            "all_bus_undervoltage_fraction": 0.0010869565217391304,
+            "all_bus_overvoltage_fraction": 0.02717391304347826,
+            "worst_all_bus_limit_excess": 0.013724784062933537,
+            "min_voltage": 0.9375301929829016,
+            "max_voltage": 1.0637247840629336,
+            "pre_report_meter_nll": 0.684825663129398
+          }
+        },
+        "true_minus_placebo": {
+          "mean_monitor_loss": {
+            "mean": -2.373557561667059e-06,
+            "day_block_ci95": [
+              -5.48124147745935e-06,
+              -2.0333459277988374e-07
+            ],
+            "moving_block_ci95_by_days": {
+              "7": [
+                -5.284231255040279e-06,
+                -2.7785868035132084e-07
+              ],
+              "34": [
+                -5.249580704229059e-06,
+                -3.3971319570678717e-07
+              ]
+            }
+          },
+          "all_bus_unsafe_fraction": {
+            "mean": 0.0,
+            "day_block_ci95": [
+              0.0,
+              0.0
+            ],
+            "moving_block_ci95_by_days": {
+              "7": [
+                0.0,
+                0.0
+              ],
+              "34": [
+                0.0,
+                0.0
+              ]
+            }
+          },
+          "pre_report_meter_nll": {
+            "mean": -0.0627640304905747,
+            "day_block_ci95": [
+              -0.07126922632772367,
+              -0.05254848900030842
+            ],
+            "moving_block_ci95_by_days": {
+              "7": [
+                -0.07401167075086872,
+                -0.0512922514039589
+              ],
+              "34": [
+                -0.07988490048701725,
+                -0.04609859984860868
+              ]
+            }
+          }
+        },
+        "changed_dispatch_intervals": 644,
+        "shared_unique_contexts": 216,
+        "lag_half_hours": 48,
+        "intervals": 5520,
+        "received_history_intervals": 5472
+      }
+    }
+  },
+  "macro_true_minus_placebo": {
+    "half_hour": {
+      "mean_monitor_loss": {
+        "mean": 6.708136854921643e-07,
+        "day_block_ci95": [
+          -6.710221290214782e-07,
+          2.325608998016862e-06
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            -3.977588111698166e-07,
+            1.9928034183364403e-06
+          ],
+          "34": [
+            -2.7163580605734815e-07,
+            1.6939519094568124e-06
+          ]
+        }
+      },
+      "all_bus_unsafe_fraction": {
+        "mean": 0.0,
+        "day_block_ci95": [
+          0.0,
+          0.0
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            0.0,
+            0.0
+          ],
+          "34": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "pre_report_meter_nll": {
+        "mean": -0.13842243506559274,
+        "day_block_ci95": [
+          -0.15176633837483286,
+          -0.125276304582002
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            -0.15334155554021134,
+            -0.1218389632363112
+          ],
+          "34": [
+            -0.1563658850022245,
+            -0.1242076211333467
+          ]
+        }
+      }
+    },
+    "previous_day": {
+      "mean_monitor_loss": {
+        "mean": -7.978049389653887e-07,
+        "day_block_ci95": [
+          -2.489887639623721e-06,
+          5.285816346842801e-07
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            -2.4442882724928837e-06,
+            4.947765998680118e-07
+          ],
+          "34": [
+            -2.3488272499609495e-06,
+            4.386737843178617e-07
+          ]
+        }
+      },
+      "all_bus_unsafe_fraction": {
+        "mean": 0.0,
+        "day_block_ci95": [
+          0.0,
+          0.0
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            0.0,
+            0.0
+          ],
+          "34": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "pre_report_meter_nll": {
+        "mean": -0.0627640304905747,
+        "day_block_ci95": [
+          -0.07126922632772367,
+          -0.05254848900030842
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            -0.07401167075086872,
+            -0.0512922514039589
+          ],
+          "34": [
+            -0.07988490048701725,
+            -0.04609859984860868
+          ]
+        }
+      }
+    }
+  },
+  "donor_training_days": [
+    100,
+    31,
+    13,
+    40,
+    124,
+    96,
+    154,
+    99,
+    4,
+    138,
+    148,
+    80,
+    32,
+    7,
+    34,
+    35,
+    153,
+    19,
+    94,
+    120,
+    133,
+    91,
+    26,
+    70,
+    9,
+    139,
+    29,
+    81,
+    118,
+    144,
+    137,
+    136,
+    24,
+    116,
+    63,
+    58,
+    90,
+    15,
+    122,
+    82,
+    110,
+    20,
+    150,
+    56,
+    112,
+    132,
+    77,
+    28,
+    71,
+    59,
+    23,
+    0,
+    127,
+    6,
+    43,
+    3,
+    151,
+    157,
+    141,
+    125,
+    117,
+    27,
+    73,
+    92,
+    52,
+    159,
+    16,
+    65,
+    54,
+    46,
+    11,
+    76,
+    114,
+    101,
+    33,
+    107,
+    62,
+    103,
+    75,
+    39,
+    123,
+    152,
+    42,
+    119,
+    55,
+    104,
+    57,
+    8,
+    12,
+    147,
+    121,
+    158,
+    143,
+    97,
+    68,
+    145,
+    105,
+    85,
+    146,
+    156,
+    86,
+    60,
+    131,
+    155,
+    87,
+    66,
+    134,
+    14,
+    84,
+    102,
+    61,
+    21,
+    22,
+    149,
+    88
+  ],
+  "last_possible_donor_raw_timestamp": "2012-01-09T23:30",
+  "first_test_timestamp": "2012-02-01T00:00",
+  "protocol": [
+    "Only historical inputs differ. Current meter categories, fitted temporal policy, initially empty buffers, feasible controls, and held-out continuous injections are identical.",
+    "Replace each complete held-out report day by a randomly selected complete training day at the same 48 clock slots. Both meters use the same donor, retaining their joint state and within-day shape. Lag this delivered stream identically to the real reports.",
+    "Donors are drawn without replacement when enough days exist. No donor's lagged raw household measurements overlap the held-out portion. The fixed seed is shared across grids.",
+    "Pre-report meter NLL is in nats per meter. True minus placebo below zero favors real history. Average grids at matching timestamps before paired day and 7/34-day moving-block intervals.",
+    "A single donor allocation does not integrate donor-draw uncertainty. Training and test seasons can differ, so this tests clock-matched substitution and does not isolate a causal effect from all distribution shift."
+  ]
+}
