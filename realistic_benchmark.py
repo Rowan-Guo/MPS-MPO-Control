@@ -38,18 +38,24 @@ def calibrate_multi_terminal(feeder,centers,site_buses=SITES,monitored=MONITORED
     m=len(site_buses)
     base=construct_category_base(feeder,site_buses)
     ref=np.ones(m,dtype=int)
+    nominal=state_power(base,centers,site_buses,ref)
+    cases=np.repeat(nominal[None],1+2*m,axis=0)
+    for j,bus in enumerate(site_buses):
+        cases[1+2*j:3+2*j,bus-1]=centers[j,[0,2]]
     const=np.zeros((len(actions),len(monitored)))
     f=np.zeros((len(actions),len(monitored),m,3))
     buses=np.asarray(monitored)-1
     for a_idx,a in enumerate(actions):
-        v0=np.abs(feeder.ac(state_power(base,centers,site_buses,ref),actions=dispatch_map(a)))[buses]
+        injections=tuple(dispatch_map(a))
+        if hasattr(feeder,"ac_batch"):
+            solved=feeder.ac_batch(cases,actions=injections)
+        else:
+            solved=np.asarray([feeder.ac(case,actions=injections) for case in cases])
+        monitored_v=np.abs(solved[:,buses])
+        v0=monitored_v[0]
         const[a_idx]=v0-1
-        for j in range(m):
-            for k in (0,2):
-                changed=ref.copy();changed[j]=k
-                vk=np.abs(feeder.ac(state_power(base,centers,site_buses,changed),
-                     actions=dispatch_map(a)))[buses]
-                f[a_idx,:,j,k]=vk-v0
+        f[a_idx,:,:,0]=(monitored_v[1::2]-v0).T
+        f[a_idx,:,:,2]=(monitored_v[2::2]-v0).T
     return const,f,len(actions)*(1+2*m)
 
 

@@ -1,0 +1,3903 @@
+{
+  "seed": 20261120,
+  "harmonics": 16,
+  "voltage_tick_pu": 0.0001,
+  "monitored_deadband": 0.02,
+  "all_bus_limits_pu": [
+    0.95,
+    1.05
+  ],
+  "fleet_p_and_abs_q_budgets_pu": [
+    0.05,
+    0.05
+  ],
+  "split": {
+    "train_first": "2011-07-01T00:00",
+    "train_last": "2011-12-07T23:30",
+    "last_raw_training_timestamp": "2012-01-09T23:30",
+    "test_first": "2012-02-01T00:00",
+    "test_last": "2012-05-25T23:30",
+    "last_raw_test_timestamp": "2012-06-27T23:30",
+    "test_intervals_per_case": 5520
+  },
+  "topologies": {
+    "ieee33": {
+      "state_buses": [
+        5,
+        6,
+        8,
+        11,
+        14,
+        17,
+        18,
+        23,
+        24,
+        25,
+        30,
+        33
+      ],
+      "pcc_buses": [
+        14,
+        18,
+        33
+      ],
+      "monitor_and_equal_split_buses": [
+        18,
+        33
+      ],
+      "day_lags": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        15,
+        18,
+        21,
+        24,
+        27,
+        30,
+        33
+      ],
+      "cases": [
+        {
+          "condition": "nominal",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 33,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 33,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 33,
+              "intervals": 5520
+            }
+          },
+          "observed_buses": [
+            8,
+            30
+          ],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.015420237181256386,
+            "p95_monitor_loss": 0.031586649322621,
+            "all_bus_unsafe_fraction": 0.1371376811594203,
+            "all_bus_undervoltage_fraction": 0.1371376811594203,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.015131907346977336,
+            "min_voltage": 0.9348680926530226,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.15862195556352873
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.00020261209344529836,
+              "p95_monitor_loss": 0.0016117889775332634,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9630228266215166,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 0.3221727272444475,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.0002005340349449826,
+              "p95_monitor_loss": 0.001498857573631946,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9636037973603865,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 4.537154545136163,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3736.0,
+              "raw_wire_bytes_per_unique_context": 10874.0
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.0002005340349449826,
+              "p95_monitor_loss": 0.001498857573631946,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9636037973603865,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 4.676336363583246,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3736.0,
+              "raw_wire_bytes_per_unique_context": 10874.0
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 2.0780585003157475e-06,
+                "day_block_ci95": [
+                  -4.209110581530263e-06,
+                  7.656237765876868e-06
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.9480072463768116
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.0
+            }
+          }
+        },
+        {
+          "condition": "pcc_derating",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 33,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 33,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {
+                "33": [
+                  -0.05,
+                  0.0
+                ]
+              }
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 33,
+              "intervals": 5520
+            }
+          },
+          "observed_buses": [
+            8,
+            30
+          ],
+          "q_limits_pu": {
+            "33": [
+              -0.05,
+              0.0
+            ]
+          },
+          "uncontrolled": {
+            "mean_monitor_loss": 0.015420237181256386,
+            "p95_monitor_loss": 0.031586649322621,
+            "all_bus_unsafe_fraction": 0.1371376811594203,
+            "all_bus_undervoltage_fraction": 0.1371376811594203,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.015131907346977336,
+            "min_voltage": 0.9348680926530226,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.15862195556352873
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.0025480233549037166,
+              "p95_monitor_loss": 0.012962357917962838,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9525727562984904,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 0.30974848502382607,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.00020090193559721447,
+              "p95_monitor_loss": 0.0015056328933759362,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9636037973603865,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 4.110645454299326,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3739.4848484848485,
+              "raw_wire_bytes_per_unique_context": 10877.484848484848
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.00020090193559721447,
+              "p95_monitor_loss": 0.0015056328933759362,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9636037973603865,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 4.362109091082609,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3739.4848484848485,
+              "raw_wire_bytes_per_unique_context": 10877.484848484848
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.002347121419306502,
+                "day_block_ci95": [
+                  0.002272692035201596,
+                  0.0024216597577644402
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 1.0
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.0
+            }
+          }
+        },
+        {
+          "condition": "telemetry_outage",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 4,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 4,
+              "observed_buses": [],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 4,
+              "intervals": 5520
+            }
+          },
+          "observed_buses": [],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.015420237181256386,
+            "p95_monitor_loss": 0.031586649322621,
+            "all_bus_unsafe_fraction": 0.1371376811594203,
+            "all_bus_undervoltage_fraction": 0.1371376811594203,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.015131907346977336,
+            "min_voltage": 0.9348680926530226,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.15862195556352873
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.00020115591109517764,
+              "p95_monitor_loss": 0.0016105762725012634,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9630228266215166,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 0.4282750005586422,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.00019869078054732467,
+              "p95_monitor_loss": 0.001498857573631946,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9636037973603865,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 18.46690000002127,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3730.0,
+              "raw_wire_bytes_per_unique_context": 10868.0
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.00019869078054732467,
+              "p95_monitor_loss": 0.001498857573631946,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9636037973603865,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 18.434974999763654,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3730.0,
+              "raw_wire_bytes_per_unique_context": 10868.0
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 2.465130547852984e-06,
+                "day_block_ci95": [
+                  -2.487235195205774e-06,
+                  7.310572993636812e-06
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 1.0
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.0
+            }
+          }
+        },
+        {
+          "condition": "outage_derating_recovery",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 66,
+          "operating_modes": [
+            {
+              "intervals": 4112,
+              "unique_contexts": 33,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {}
+            },
+            {
+              "intervals": 640,
+              "unique_contexts": 28,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {
+                "33": [
+                  -0.05,
+                  0.0
+                ]
+              }
+            },
+            {
+              "intervals": 256,
+              "unique_contexts": 2,
+              "observed_buses": [],
+              "q_limits_pu": {}
+            },
+            {
+              "intervals": 512,
+              "unique_contexts": 3,
+              "observed_buses": [],
+              "q_limits_pu": {
+                "33": [
+                  -0.05,
+                  0.0
+                ]
+              }
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 66,
+              "intervals": 5520
+            }
+          },
+          "uncontrolled": {
+            "mean_monitor_loss": 0.015420237181256386,
+            "p95_monitor_loss": 0.031586649322621,
+            "all_bus_unsafe_fraction": 0.1371376811594203,
+            "all_bus_undervoltage_fraction": 0.1371376811594203,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.015131907346977336,
+            "min_voltage": 0.9348680926530226,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.15862195556352873
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.0007756487755452685,
+              "p95_monitor_loss": 0.006050415636289413,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9525727562984904,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 0.31867727281650965,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.00019946407310109226,
+              "p95_monitor_loss": 0.001492365197909028,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9636037973603865,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 5.329631818147556,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3737.090909090909,
+              "raw_wire_bytes_per_unique_context": 10875.09090909091
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.00019946407310109226,
+              "p95_monitor_loss": 0.001492365197909028,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9636037973603865,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 5.516354545430989,
+              "neighbor_messages_per_unique_context": 4.0606060606060606,
+              "wire_bytes_per_unique_context": 3737.2727272727275,
+              "raw_wire_bytes_per_unique_context": 10875.272727272728
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.0005761847024441763,
+                "day_block_ci95": [
+                  0.000416186874798463,
+                  0.0007394852272033698
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.9644927536231884
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.0
+            }
+          }
+        },
+        {
+          "condition": "heavy_demand",
+          "load_scale": 0.9,
+          "pv_scale": 0.8,
+          "slack": 1.02,
+          "unique_contexts": 35,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 35,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 30,
+              "intervals": 4977
+            },
+            "qualified": {
+              "unique_contexts": 5,
+              "intervals": 543
+            }
+          },
+          "observed_buses": [
+            8,
+            30
+          ],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.04050051219804804,
+            "p95_monitor_loss": 0.062133573444957325,
+            "all_bus_unsafe_fraction": 0.913768115942029,
+            "all_bus_undervoltage_fraction": 0.913768115942029,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.05188294378601688,
+            "min_voltage": 0.8981170562139831,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.27340218124291427
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.008756460134981747,
+              "p95_monitor_loss": 0.02740630448159158,
+              "all_bus_unsafe_fraction": 0.08713768115942029,
+              "all_bus_undervoltage_fraction": 0.08713768115942029,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.020289915840531303,
+              "min_voltage": 0.9297100841594687,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 0.28865999972497647,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.008733388653554242,
+              "p95_monitor_loss": 0.02740630448159158,
+              "all_bus_unsafe_fraction": 0.08713768115942029,
+              "all_bus_undervoltage_fraction": 0.08713768115942029,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.020289915840531303,
+              "min_voltage": 0.9297100841594687,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 5.214714285934211,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3899.0857142857144,
+              "raw_wire_bytes_per_unique_context": 10922.085714285715
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.008727472317861078,
+              "p95_monitor_loss": 0.02740630448159158,
+              "all_bus_unsafe_fraction": 0.08731884057971015,
+              "all_bus_undervoltage_fraction": 0.08731884057971015,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.020289915840531303,
+              "min_voltage": 0.9297100841594687,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 5.486997143140927,
+              "neighbor_messages_per_unique_context": 4.571428571428571,
+              "wire_bytes_per_unique_context": 3899.942857142857,
+              "raw_wire_bytes_per_unique_context": 10922.942857142858
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 2.898781712066826e-05,
+                "day_block_ci95": [
+                  2.427376048183288e-05,
+                  3.410658397161624e-05
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": -0.00018115942028985507,
+                "day_block_ci95": [
+                  -0.0009057971014492754,
+                  0.00036231884057971015
+                ]
+              },
+              "different_dispatch_fraction": 0.3052536231884058
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 5.916335693162465e-06,
+                "day_block_ci95": [
+                  1.6135295738526008e-06,
+                  1.0572065346415775e-05
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": -0.00018115942028985507,
+                "day_block_ci95": [
+                  -0.0009057971014492754,
+                  0.00036231884057971015
+                ]
+              },
+              "different_dispatch_fraction": 0.0983695652173913
+            }
+          }
+        },
+        {
+          "condition": "solar_export",
+          "load_scale": 0.65,
+          "pv_scale": 7.5,
+          "slack": 1.045,
+          "unique_contexts": 30,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 30,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 30,
+              "intervals": 5520
+            }
+          },
+          "observed_buses": [
+            8,
+            30
+          ],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.004269386295849333,
+            "p95_monitor_loss": 0.0236632145915088,
+            "all_bus_unsafe_fraction": 0.04927536231884058,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.04927536231884058,
+            "worst_all_bus_limit_excess": 0.017397055172256426,
+            "min_voltage": 0.962584734521964,
+            "max_voltage": 1.0673970551722565,
+            "head_export_intervals": 831,
+            "head_export_fraction": 0.15054347826086956,
+            "minimum_head_active_power_pu": -0.22258745422832651
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.0018103642035935418,
+              "p95_monitor_loss": 0.010445029323641322,
+              "all_bus_unsafe_fraction": 0.023731884057971015,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.023731884057971015,
+              "worst_all_bus_limit_excess": 0.009029107452847907,
+              "min_voltage": 0.9557957277541079,
+              "max_voltage": 1.059029107452848,
+              "ms_per_unique_context": 0.2974966667049254,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.001278147334834342,
+              "p95_monitor_loss": 0.010092654356318018,
+              "all_bus_unsafe_fraction": 0.02391304347826087,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.02391304347826087,
+              "worst_all_bus_limit_excess": 0.00902910745318275,
+              "min_voltage": 0.9613111977521495,
+              "max_voltage": 1.0590291074531828,
+              "ms_per_unique_context": 5.263639999975567,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3722.9,
+              "raw_wire_bytes_per_unique_context": 10842.9
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.001278147334834342,
+              "p95_monitor_loss": 0.010092654356318018,
+              "all_bus_unsafe_fraction": 0.02391304347826087,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.02391304347826087,
+              "worst_all_bus_limit_excess": 0.00902910745318275,
+              "min_voltage": 0.9613111977521495,
+              "max_voltage": 1.0590291074531828,
+              "ms_per_unique_context": 5.419986666553693,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3722.9,
+              "raw_wire_bytes_per_unique_context": 10842.9
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.0005322168687591997,
+                "day_block_ci95": [
+                  0.00047279002585407475,
+                  0.0005936774883896441
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": -0.00018115942028985507,
+                "day_block_ci95": [
+                  -0.0005434782608695652,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.6764492753623188
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.0
+            }
+          }
+        }
+      ],
+      "fits": [
+        {
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "train_intervals": 7680,
+          "qualification_intervals": 3072,
+          "qualified_archive_commands": 38,
+          "fit_seconds": 2.5268548999993072
+        },
+        {
+          "load_scale": 0.9,
+          "pv_scale": 0.8,
+          "slack": 1.02,
+          "train_intervals": 7680,
+          "qualification_intervals": 3072,
+          "qualified_archive_commands": 9,
+          "fit_seconds": 1.797947099999874
+        },
+        {
+          "load_scale": 0.65,
+          "pv_scale": 7.5,
+          "slack": 1.045,
+          "train_intervals": 7680,
+          "qualification_intervals": 3072,
+          "qualified_archive_commands": 29,
+          "fit_seconds": 2.0172553999982483
+        }
+      ],
+      "topology": {
+        "topology": "ieee33",
+        "buses": 33,
+        "closed_branch_count": 32,
+        "closed_tie": null,
+        "opened_section": null,
+        "max_depth": 17,
+        "max_path_impedance_pu": 0.8954259703374393,
+        "max_path_impedance_bus": 18,
+        "leaf_buses": [
+          18,
+          22,
+          25,
+          33
+        ],
+        "base_mva": 10.0,
+        "base_kv": 12.66,
+        "source_url": "https://github.com/MATPOWER/matpower/blob/b6c85b0323d20fb801cab3377c803a285d730847/data/case33bw.m"
+      }
+    },
+    "ieee33_tie_8_21": {
+      "state_buses": [
+        5,
+        6,
+        8,
+        11,
+        14,
+        17,
+        18,
+        23,
+        24,
+        25,
+        30,
+        33
+      ],
+      "pcc_buses": [
+        14,
+        18,
+        33
+      ],
+      "monitor_and_equal_split_buses": [
+        18,
+        33
+      ],
+      "day_lags": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        15,
+        18,
+        21,
+        24,
+        27,
+        30,
+        33
+      ],
+      "cases": [
+        {
+          "condition": "nominal",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 33,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 33,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 33,
+              "intervals": 5520
+            }
+          },
+          "observed_buses": [
+            8,
+            30
+          ],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.00548474022459867,
+            "p95_monitor_loss": 0.017531328501644877,
+            "all_bus_unsafe_fraction": 0.0007246376811594203,
+            "all_bus_undervoltage_fraction": 0.0007246376811594203,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.0017609341801720912,
+            "min_voltage": 0.9482390658198279,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.15769626349516602
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 8.442086411577154e-05,
+              "p95_monitor_loss": 0.00013334366298959295,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9661109420310412,
+              "max_voltage": 1.0211877094982809,
+              "ms_per_unique_context": 0.29206060593644384,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 7.391235144502073e-06,
+              "p95_monitor_loss": 0.0,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9738705339425586,
+              "max_voltage": 1.0201830585980831,
+              "ms_per_unique_context": 4.1552848483799165,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3168.5757575757575,
+              "raw_wire_bytes_per_unique_context": 9759.575757575758
+            },
+            "adaptive": {
+              "mean_monitor_loss": 7.391235144502073e-06,
+              "p95_monitor_loss": 0.0,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9738705339425586,
+              "max_voltage": 1.0201830585980831,
+              "ms_per_unique_context": 4.374212120940986,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3168.5757575757575,
+              "raw_wire_bytes_per_unique_context": 9759.575757575758
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 7.702962897126949e-05,
+                "day_block_ci95": [
+                  6.329861379856543e-05,
+                  9.204610606031815e-05
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 1.0
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.0
+            }
+          }
+        },
+        {
+          "condition": "pcc_derating",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 33,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 33,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {
+                "33": [
+                  -0.05,
+                  0.0
+                ]
+              }
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 33,
+              "intervals": 5520
+            }
+          },
+          "observed_buses": [
+            8,
+            30
+          ],
+          "q_limits_pu": {
+            "33": [
+              -0.05,
+              0.0
+            ]
+          },
+          "uncontrolled": {
+            "mean_monitor_loss": 0.00548474022459867,
+            "p95_monitor_loss": 0.017531328501644877,
+            "all_bus_unsafe_fraction": 0.0007246376811594203,
+            "all_bus_undervoltage_fraction": 0.0007246376811594203,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.0017609341801720912,
+            "min_voltage": 0.9482390658198279,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.15769626349516602
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.0003336891671053298,
+              "p95_monitor_loss": 0.002508476318875075,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9638610410169929,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 0.31430606053838733,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 7.40052471438888e-06,
+              "p95_monitor_loss": 0.0,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9738705339425586,
+              "max_voltage": 1.0201830585980831,
+              "ms_per_unique_context": 3.971154545125142,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3172.7272727272725,
+              "raw_wire_bytes_per_unique_context": 9763.727272727272
+            },
+            "adaptive": {
+              "mean_monitor_loss": 7.40052471438888e-06,
+              "p95_monitor_loss": 0.0,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9738705339425586,
+              "max_voltage": 1.0201830585980831,
+              "ms_per_unique_context": 3.964254545611435,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3172.7272727272725,
+              "raw_wire_bytes_per_unique_context": 9763.727272727272
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.00032628864239094094,
+                "day_block_ci95": [
+                  0.0002843062706096626,
+                  0.00036839509358357523
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 1.0
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.0
+            }
+          }
+        },
+        {
+          "condition": "telemetry_outage",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 4,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 4,
+              "observed_buses": [],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 4,
+              "intervals": 5520
+            }
+          },
+          "observed_buses": [],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.00548474022459867,
+            "p95_monitor_loss": 0.017531328501644877,
+            "all_bus_unsafe_fraction": 0.0007246376811594203,
+            "all_bus_undervoltage_fraction": 0.0007246376811594203,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.0017609341801720912,
+            "min_voltage": 0.9482390658198279,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.15769626349516602
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 7.734773605705857e-05,
+              "p95_monitor_loss": 0.0,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9661109420310412,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 0.37554999926214805,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 6.322282659406979e-06,
+              "p95_monitor_loss": 0.0,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9738705339425586,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 13.908150000133901,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3176.25,
+              "raw_wire_bytes_per_unique_context": 9767.25
+            },
+            "adaptive": {
+              "mean_monitor_loss": 6.322282659406979e-06,
+              "p95_monitor_loss": 0.0,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9738705339425586,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 14.34154999878956,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3176.25,
+              "raw_wire_bytes_per_unique_context": 9767.25
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 7.10254533976516e-05,
+                "day_block_ci95": [
+                  5.90465821178287e-05,
+                  8.502982511706898e-05
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 1.0
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.0
+            }
+          }
+        },
+        {
+          "condition": "outage_derating_recovery",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 66,
+          "operating_modes": [
+            {
+              "intervals": 4112,
+              "unique_contexts": 33,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {}
+            },
+            {
+              "intervals": 640,
+              "unique_contexts": 28,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {
+                "33": [
+                  -0.05,
+                  0.0
+                ]
+              }
+            },
+            {
+              "intervals": 256,
+              "unique_contexts": 2,
+              "observed_buses": [],
+              "q_limits_pu": {}
+            },
+            {
+              "intervals": 512,
+              "unique_contexts": 3,
+              "observed_buses": [],
+              "q_limits_pu": {
+                "33": [
+                  -0.05,
+                  0.0
+                ]
+              }
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 66,
+              "intervals": 5520
+            }
+          },
+          "uncontrolled": {
+            "mean_monitor_loss": 0.00548474022459867,
+            "p95_monitor_loss": 0.017531328501644877,
+            "all_bus_unsafe_fraction": 0.0007246376811594203,
+            "all_bus_undervoltage_fraction": 0.0007246376811594203,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.0017609341801720912,
+            "min_voltage": 0.9482390658198279,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.15769626349516602
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.00015914195256060384,
+              "p95_monitor_loss": 0.0010869143466373625,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9638610410169929,
+              "max_voltage": 1.0211877094982809,
+              "ms_per_unique_context": 0.3084075756994549,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 7.565088070942779e-06,
+              "p95_monitor_loss": 0.0,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9738705339425586,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 4.8941045455594026,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3171.6363636363635,
+              "raw_wire_bytes_per_unique_context": 9762.636363636364
+            },
+            "adaptive": {
+              "mean_monitor_loss": 7.565088070942779e-06,
+              "p95_monitor_loss": 0.0,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9738705339425586,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 5.060609090860728,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3171.6363636363635,
+              "raw_wire_bytes_per_unique_context": 9762.636363636364
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.00015157686448966106,
+                "day_block_ci95": [
+                  0.00012314426244057418,
+                  0.0001835198891158195
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 1.0
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.0
+            }
+          }
+        },
+        {
+          "condition": "heavy_demand",
+          "load_scale": 0.9,
+          "pv_scale": 0.8,
+          "slack": 1.02,
+          "unique_contexts": 35,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 35,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 34,
+              "intervals": 5383
+            },
+            "qualified": {
+              "unique_contexts": 1,
+              "intervals": 137
+            }
+          },
+          "observed_buses": [
+            8,
+            30
+          ],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.0246505138720313,
+            "p95_monitor_loss": 0.04153325410100347,
+            "all_bus_unsafe_fraction": 0.35108695652173916,
+            "all_bus_undervoltage_fraction": 0.35108695652173916,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.03220382392807897,
+            "min_voltage": 0.917796176071921,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.2712429555807052
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.0026329986907917134,
+              "p95_monitor_loss": 0.011451840322771772,
+              "all_bus_unsafe_fraction": 0.003985507246376811,
+              "all_bus_undervoltage_fraction": 0.003985507246376811,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.005021052970897499,
+              "min_voltage": 0.9449789470291025,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 0.31081999997175963,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.002457547610616444,
+              "p95_monitor_loss": 0.011576874021932958,
+              "all_bus_unsafe_fraction": 0.003260869565217391,
+              "all_bus_undervoltage_fraction": 0.003260869565217391,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.005021052973949058,
+              "min_voltage": 0.9449789470260509,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 4.953408571496506,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3180.542857142857,
+              "raw_wire_bytes_per_unique_context": 9769.542857142857
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.002468970964972008,
+              "p95_monitor_loss": 0.011545592410457155,
+              "all_bus_unsafe_fraction": 0.003260869565217391,
+              "all_bus_undervoltage_fraction": 0.003260869565217391,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.005021052973949058,
+              "min_voltage": 0.9449789470260509,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 5.014114285794286,
+              "neighbor_messages_per_unique_context": 4.114285714285714,
+              "wire_bytes_per_unique_context": 3180.714285714286,
+              "raw_wire_bytes_per_unique_context": 9769.714285714286
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.00016402772581970481,
+                "day_block_ci95": [
+                  0.00014576015679954846,
+                  0.00018408395430118834
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0007246376811594203,
+                "day_block_ci95": [
+                  0.0,
+                  0.0016304347826086956
+                ]
+              },
+              "different_dispatch_fraction": 0.7070652173913043
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": -1.1423354355564201e-05,
+                "day_block_ci95": [
+                  -2.8556315425116103e-05,
+                  4.379298230021605e-06
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.024818840579710146
+            }
+          }
+        },
+        {
+          "condition": "solar_export",
+          "load_scale": 0.65,
+          "pv_scale": 7.5,
+          "slack": 1.045,
+          "unique_contexts": 30,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 30,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 30,
+              "intervals": 5520
+            }
+          },
+          "observed_buses": [
+            8,
+            30
+          ],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.00396647091170616,
+            "p95_monitor_loss": 0.021829771830955455,
+            "all_bus_unsafe_fraction": 0.06938405797101449,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.06938405797101449,
+            "worst_all_bus_limit_excess": 0.01592726956623647,
+            "min_voltage": 0.9754401302553534,
+            "max_voltage": 1.0659272695662365,
+            "head_export_intervals": 836,
+            "head_export_fraction": 0.15144927536231884,
+            "minimum_head_active_power_pu": -0.22508221942527384
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.0014179018473743311,
+              "p95_monitor_loss": 0.009880508008097904,
+              "all_bus_unsafe_fraction": 0.025905797101449274,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.025905797101449274,
+              "worst_all_bus_limit_excess": 0.005112532630684896,
+              "min_voltage": 0.9691931435993346,
+              "max_voltage": 1.055112532630685,
+              "ms_per_unique_context": 0.3025133332509237,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.0014102270176289268,
+              "p95_monitor_loss": 0.009860826813082145,
+              "all_bus_unsafe_fraction": 0.02572463768115942,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.02572463768115942,
+              "worst_all_bus_limit_excess": 0.00511253263068201,
+              "min_voltage": 0.9648107749565527,
+              "max_voltage": 1.055112532630682,
+              "ms_per_unique_context": 5.742766666905179,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3207.9,
+              "raw_wire_bytes_per_unique_context": 9784.9
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.0014102270176289268,
+              "p95_monitor_loss": 0.009860826813082145,
+              "all_bus_unsafe_fraction": 0.02572463768115942,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.02572463768115942,
+              "worst_all_bus_limit_excess": 0.00511253263068201,
+              "min_voltage": 0.9648107749565527,
+              "max_voltage": 1.055112532630682,
+              "ms_per_unique_context": 5.773690000084268,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3207.9,
+              "raw_wire_bytes_per_unique_context": 9784.9
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 7.674829745404512e-06,
+                "day_block_ci95": [
+                  -1.6765592277242098e-06,
+                  1.7387594618906357e-05
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.00018115942028985507,
+                "day_block_ci95": [
+                  0.0,
+                  0.0005434782608695652
+                ]
+              },
+              "different_dispatch_fraction": 0.6764492753623188
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.0
+            }
+          }
+        }
+      ],
+      "fits": [
+        {
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "train_intervals": 7680,
+          "qualification_intervals": 3072,
+          "qualified_archive_commands": 31,
+          "fit_seconds": 1.9490619999996852
+        },
+        {
+          "load_scale": 0.9,
+          "pv_scale": 0.8,
+          "slack": 1.02,
+          "train_intervals": 7680,
+          "qualification_intervals": 3072,
+          "qualified_archive_commands": 12,
+          "fit_seconds": 1.695029099999374
+        },
+        {
+          "load_scale": 0.65,
+          "pv_scale": 7.5,
+          "slack": 1.045,
+          "train_intervals": 7680,
+          "qualification_intervals": 3072,
+          "qualified_archive_commands": 21,
+          "fit_seconds": 1.9750032999982068
+        }
+      ],
+      "topology": {
+        "topology": "ieee33_tie_8_21",
+        "buses": 33,
+        "closed_branch_count": 32,
+        "closed_tie": [
+          8,
+          21
+        ],
+        "opened_section": [
+          7,
+          8
+        ],
+        "max_depth": 15,
+        "max_path_impedance_pu": 1.0216082942245956,
+        "max_path_impedance_bus": 18,
+        "leaf_buses": [
+          7,
+          18,
+          22,
+          25,
+          33
+        ],
+        "base_mva": 10.0,
+        "base_kv": 12.66,
+        "source_url": "https://github.com/MATPOWER/matpower/blob/b6c85b0323d20fb801cab3377c803a285d730847/data/case33bw.m"
+      }
+    },
+    "ieee33_tie_18_33": {
+      "state_buses": [
+        5,
+        6,
+        8,
+        11,
+        14,
+        17,
+        18,
+        23,
+        24,
+        25,
+        30,
+        33
+      ],
+      "pcc_buses": [
+        14,
+        18,
+        33
+      ],
+      "monitor_and_equal_split_buses": [
+        18,
+        33
+      ],
+      "day_lags": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        15,
+        18,
+        21,
+        24,
+        27,
+        30,
+        33
+      ],
+      "cases": [
+        {
+          "condition": "nominal",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 33,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 33,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 30,
+              "intervals": 4020
+            },
+            "qualified": {
+              "unique_contexts": 3,
+              "intervals": 1500
+            }
+          },
+          "observed_buses": [
+            8,
+            30
+          ],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.02621850706262049,
+            "p95_monitor_loss": 0.046456541326783125,
+            "all_bus_unsafe_fraction": 0.42735507246376814,
+            "all_bus_undervoltage_fraction": 0.42735507246376814,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.03761632159920625,
+            "min_voltage": 0.9123836784007937,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.1590094265694259
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.0005472246415970149,
+              "p95_monitor_loss": 0.004502466925118,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9565371833417653,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 0.33124848491614545,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.0004521916309287513,
+              "p95_monitor_loss": 0.0036736858892420076,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9622725830900247,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 5.149533333182759,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3837.5454545454545,
+              "raw_wire_bytes_per_unique_context": 10952.545454545454
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.0004502452601821245,
+              "p95_monitor_loss": 0.0036573019529769417,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9623005927314332,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 5.6004757574224975,
+              "neighbor_messages_per_unique_context": 4.363636363636363,
+              "wire_bytes_per_unique_context": 3838.6363636363635,
+              "raw_wire_bytes_per_unique_context": 10953.636363636364
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 9.697938141489047e-05,
+                "day_block_ci95": [
+                  8.848323511760334e-05,
+                  0.00010549243661216837
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.9806159420289855
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 1.9463707466268744e-06,
+                "day_block_ci95": [
+                  1.7342039992333595e-06,
+                  2.1780600562025767e-06
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.2717391304347826
+            }
+          }
+        },
+        {
+          "condition": "pcc_derating",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 33,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 33,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {
+                "33": [
+                  -0.05,
+                  0.0
+                ]
+              }
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 30,
+              "intervals": 4020
+            },
+            "qualified": {
+              "unique_contexts": 3,
+              "intervals": 1500
+            }
+          },
+          "observed_buses": [
+            8,
+            30
+          ],
+          "q_limits_pu": {
+            "33": [
+              -0.05,
+              0.0
+            ]
+          },
+          "uncontrolled": {
+            "mean_monitor_loss": 0.02621850706262049,
+            "p95_monitor_loss": 0.046456541326783125,
+            "all_bus_unsafe_fraction": 0.42735507246376814,
+            "all_bus_undervoltage_fraction": 0.42735507246376814,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.03761632159920625,
+            "min_voltage": 0.9123836784007937,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.1590094265694259
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.005751543793867327,
+              "p95_monitor_loss": 0.023011700422575446,
+              "all_bus_unsafe_fraction": 0.05326086956521739,
+              "all_bus_undervoltage_fraction": 0.05326086956521739,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.012965519547455617,
+              "min_voltage": 0.9370344804525443,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 0.3745545453222638,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.00045161543934213086,
+              "p95_monitor_loss": 0.0036703358750886637,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9622725830900247,
+              "max_voltage": 1.0200997615469605,
+              "ms_per_unique_context": 5.001609091061365,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3857.5454545454545,
+              "raw_wire_bytes_per_unique_context": 10972.545454545454
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.0004496690685955039,
+              "p95_monitor_loss": 0.003646772476539575,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9623005927314332,
+              "max_voltage": 1.0200997615469605,
+              "ms_per_unique_context": 4.805109090904642,
+              "neighbor_messages_per_unique_context": 4.363636363636363,
+              "wire_bytes_per_unique_context": 3858.6363636363635,
+              "raw_wire_bytes_per_unique_context": 10973.636363636364
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.005301874725271824,
+                "day_block_ci95": [
+                  0.005184133366186363,
+                  0.005434382322079787
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.05326086956521739,
+                "day_block_ci95": [
+                  0.044384057971014496,
+                  0.06187047101449275
+                ]
+              },
+              "different_dispatch_fraction": 1.0
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 1.9463707466268744e-06,
+                "day_block_ci95": [
+                  1.7342039992333595e-06,
+                  2.1780600562025767e-06
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.2717391304347826
+            }
+          }
+        },
+        {
+          "condition": "telemetry_outage",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 4,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 4,
+              "observed_buses": [],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 1,
+              "intervals": 1380
+            },
+            "qualified": {
+              "unique_contexts": 3,
+              "intervals": 4140
+            }
+          },
+          "observed_buses": [],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.02621850706262049,
+            "p95_monitor_loss": 0.046456541326783125,
+            "all_bus_unsafe_fraction": 0.42735507246376814,
+            "all_bus_undervoltage_fraction": 0.42735507246376814,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.03761632159920625,
+            "min_voltage": 0.9123836784007937,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.1590094265694259
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.0005443722132920639,
+              "p95_monitor_loss": 0.004502466925118,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9565371833417653,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 0.3575750006348244,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.0004516774683328436,
+              "p95_monitor_loss": 0.0036703358750886637,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9622725830900247,
+              "max_voltage": 1.021843606567017,
+              "ms_per_unique_context": 17.842425000708317,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3843.75,
+              "raw_wire_bytes_per_unique_context": 10958.75
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.0004495977124419074,
+              "p95_monitor_loss": 0.003646772476539575,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9623005927314332,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 18.415125000501575,
+              "neighbor_messages_per_unique_context": 7.0,
+              "wire_bytes_per_unique_context": 3852.75,
+              "raw_wire_bytes_per_unique_context": 10967.75
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 9.477450085015646e-05,
+                "day_block_ci95": [
+                  8.613307978116518e-05,
+                  0.00010353508732516578
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 1.0
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 2.0797558909361305e-06,
+                "day_block_ci95": [
+                  1.825001765017146e-06,
+                  2.350424551661418e-06
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.75
+            }
+          }
+        },
+        {
+          "condition": "outage_derating_recovery",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 66,
+          "operating_modes": [
+            {
+              "intervals": 4112,
+              "unique_contexts": 33,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {}
+            },
+            {
+              "intervals": 640,
+              "unique_contexts": 28,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {
+                "33": [
+                  -0.05,
+                  0.0
+                ]
+              }
+            },
+            {
+              "intervals": 256,
+              "unique_contexts": 2,
+              "observed_buses": [],
+              "q_limits_pu": {}
+            },
+            {
+              "intervals": 512,
+              "unique_contexts": 3,
+              "observed_buses": [],
+              "q_limits_pu": {
+                "33": [
+                  -0.05,
+                  0.0
+                ]
+              }
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 56,
+              "intervals": 3647
+            },
+            "qualified": {
+              "unique_contexts": 10,
+              "intervals": 1873
+            }
+          },
+          "uncontrolled": {
+            "mean_monitor_loss": 0.02621850706262049,
+            "p95_monitor_loss": 0.046456541326783125,
+            "all_bus_unsafe_fraction": 0.42735507246376814,
+            "all_bus_undervoltage_fraction": 0.42735507246376814,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.03761632159920625,
+            "min_voltage": 0.9123836784007937,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.1590094265694259
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.0017427662404293147,
+              "p95_monitor_loss": 0.014188480966824178,
+              "all_bus_unsafe_fraction": 0.0161231884057971,
+              "all_bus_undervoltage_fraction": 0.0161231884057971,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.011690694405410373,
+              "min_voltage": 0.9383093055945896,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 0.3137545454316723,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.00045184659800658896,
+              "p95_monitor_loss": 0.0036736858892420076,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9622725830900247,
+              "max_voltage": 1.0221314072199292,
+              "ms_per_unique_context": 5.271540909289439,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3848.1363636363635,
+              "raw_wire_bytes_per_unique_context": 10963.136363636364
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.00044989033652791685,
+              "p95_monitor_loss": 0.0036573019529769417,
+              "all_bus_unsafe_fraction": 0.0,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.0,
+              "min_voltage": 0.9623005927314332,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 5.505110606078013,
+              "neighbor_messages_per_unique_context": 4.606060606060606,
+              "wire_bytes_per_unique_context": 3849.9545454545455,
+              "raw_wire_bytes_per_unique_context": 10964.954545454546
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.0012928759039013984,
+                "day_block_ci95": [
+                  0.0009679444036209702,
+                  0.0016386137504646049
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0161231884057971,
+                "day_block_ci95": [
+                  0.01041213768115942,
+                  0.02246376811594203
+                ]
+              },
+              "different_dispatch_fraction": 0.9853260869565217
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 1.9562614786720915e-06,
+                "day_block_ci95": [
+                  1.7380946207416948e-06,
+                  2.1948715700275505e-06
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.3393115942028985
+            }
+          }
+        },
+        {
+          "condition": "heavy_demand",
+          "load_scale": 0.9,
+          "pv_scale": 0.8,
+          "slack": 1.02,
+          "unique_contexts": 35,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 35,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 34,
+              "intervals": 4712
+            },
+            "qualified": {
+              "unique_contexts": 1,
+              "intervals": 808
+            }
+          },
+          "observed_buses": [
+            8,
+            30
+          ],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.056726801255888644,
+            "p95_monitor_loss": 0.08420852148664476,
+            "all_bus_unsafe_fraction": 1.0,
+            "all_bus_undervoltage_fraction": 1.0,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.08549013809805805,
+            "min_voltage": 0.8645098619019419,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.27426739533627986
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.014150718339363195,
+              "p95_monitor_loss": 0.039147855132261,
+              "all_bus_unsafe_fraction": 0.26268115942028986,
+              "all_bus_undervoltage_fraction": 0.26268115942028986,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.03719139739618571,
+              "min_voltage": 0.9128086026038142,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 0.2818171428641238,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.013397586436471258,
+              "p95_monitor_loss": 0.03808982580869976,
+              "all_bus_unsafe_fraction": 0.1664855072463768,
+              "all_bus_undervoltage_fraction": 0.1664855072463768,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.026471583783579944,
+              "min_voltage": 0.92352841621642,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 5.076731428458255,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3937.0,
+              "raw_wire_bytes_per_unique_context": 11078.0
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.01339384132889012,
+              "p95_monitor_loss": 0.03808982580869976,
+              "all_bus_unsafe_fraction": 0.1664855072463768,
+              "all_bus_undervoltage_fraction": 0.1664855072463768,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.026471583783579944,
+              "min_voltage": 0.92352841621642,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 5.30453428592799,
+              "neighbor_messages_per_unique_context": 4.114285714285714,
+              "wire_bytes_per_unique_context": 3937.1714285714284,
+              "raw_wire_bytes_per_unique_context": 11078.171428571428
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.000756877010473077,
+                "day_block_ci95": [
+                  0.0007424299161564912,
+                  0.000771946901338083
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.09619565217391304,
+                "day_block_ci95": [
+                  0.08786231884057971,
+                  0.10389945652173913
+                ]
+              },
+              "different_dispatch_fraction": 1.0
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 3.745107581139437e-06,
+                "day_block_ci95": [
+                  3.395553922138893e-06,
+                  4.1107310375591435e-06
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.1463768115942029
+            }
+          }
+        },
+        {
+          "condition": "solar_export",
+          "load_scale": 0.65,
+          "pv_scale": 7.5,
+          "slack": 1.045,
+          "unique_contexts": 30,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 30,
+              "observed_buses": [
+                8,
+                30
+              ],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 30,
+              "intervals": 5520
+            }
+          },
+          "observed_buses": [
+            8,
+            30
+          ],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.006826367311275408,
+            "p95_monitor_loss": 0.025609346992138456,
+            "all_bus_unsafe_fraction": 0.06865942028985507,
+            "all_bus_undervoltage_fraction": 0.01684782608695652,
+            "all_bus_overvoltage_fraction": 0.05181159420289855,
+            "worst_all_bus_limit_excess": 0.026316074108154508,
+            "min_voltage": 0.9407565289328341,
+            "max_voltage": 1.0763160741081546,
+            "head_export_intervals": 828,
+            "head_export_fraction": 0.15,
+            "minimum_head_active_power_pu": -0.22125206132576297
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.001080658190005251,
+              "p95_monitor_loss": 0.008272566521549679,
+              "all_bus_unsafe_fraction": 0.023369565217391305,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.023369565217391305,
+              "worst_all_bus_limit_excess": 0.00880681829712393,
+              "min_voltage": 0.9552960149179455,
+              "max_voltage": 1.058806818297124,
+              "ms_per_unique_context": 0.3667199997532104,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.0009485141903482428,
+              "p95_monitor_loss": 0.007505733361161598,
+              "all_bus_unsafe_fraction": 0.023007246376811594,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.023007246376811594,
+              "worst_all_bus_limit_excess": 0.007773068037823405,
+              "min_voltage": 0.9513082285639245,
+              "max_voltage": 1.0577730680378234,
+              "ms_per_unique_context": 5.615866666994407,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3770.5,
+              "raw_wire_bytes_per_unique_context": 10931.5
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.0009485141903482428,
+              "p95_monitor_loss": 0.007505733361161598,
+              "all_bus_unsafe_fraction": 0.023007246376811594,
+              "all_bus_undervoltage_fraction": 0.0,
+              "all_bus_overvoltage_fraction": 0.023007246376811594,
+              "worst_all_bus_limit_excess": 0.007773068037823405,
+              "min_voltage": 0.9513082285639245,
+              "max_voltage": 1.0577730680378234,
+              "ms_per_unique_context": 5.832006666848126,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 3770.5,
+              "raw_wire_bytes_per_unique_context": 10931.5
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.00013214399965700817,
+                "day_block_ci95": [
+                  0.00010047029884024108,
+                  0.00016529887560813526
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.00036231884057971015,
+                "day_block_ci95": [
+                  0.0,
+                  0.0009057971014492754
+                ]
+              },
+              "different_dispatch_fraction": 1.0
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.0
+            }
+          }
+        }
+      ],
+      "fits": [
+        {
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "train_intervals": 7680,
+          "qualification_intervals": 3072,
+          "qualified_archive_commands": 39,
+          "fit_seconds": 2.0938067999995837
+        },
+        {
+          "load_scale": 0.9,
+          "pv_scale": 0.8,
+          "slack": 1.02,
+          "train_intervals": 7680,
+          "qualification_intervals": 3072,
+          "qualified_archive_commands": 10,
+          "fit_seconds": 1.7620607999997446
+        },
+        {
+          "load_scale": 0.65,
+          "pv_scale": 7.5,
+          "slack": 1.045,
+          "train_intervals": 7680,
+          "qualification_intervals": 3072,
+          "qualified_archive_commands": 41,
+          "fit_seconds": 2.424830200001452
+        }
+      ],
+      "topology": {
+        "topology": "ieee33_tie_18_33",
+        "buses": 33,
+        "closed_branch_count": 32,
+        "closed_tie": [
+          18,
+          33
+        ],
+        "opened_section": [
+          13,
+          14
+        ],
+        "max_depth": 18,
+        "max_path_impedance_pu": 0.8726695367929437,
+        "max_path_impedance_bus": 14,
+        "leaf_buses": [
+          13,
+          14,
+          22,
+          25
+        ],
+        "base_mva": 10.0,
+        "base_kv": 12.66,
+        "source_url": "https://github.com/MATPOWER/matpower/blob/b6c85b0323d20fb801cab3377c803a285d730847/data/case33bw.m"
+      }
+    },
+    "case69": {
+      "state_buses": [
+        8,
+        11,
+        12,
+        16,
+        18,
+        21,
+        24,
+        49,
+        50,
+        61,
+        64,
+        65
+      ],
+      "pcc_buses": [
+        21,
+        27,
+        65
+      ],
+      "monitor_and_equal_split_buses": [
+        27,
+        65
+      ],
+      "day_lags": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        15,
+        18,
+        21,
+        24,
+        27,
+        30,
+        33
+      ],
+      "cases": [
+        {
+          "condition": "nominal",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 33,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 33,
+              "observed_buses": [
+                12,
+                64
+              ],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 33,
+              "intervals": 5520
+            }
+          },
+          "observed_buses": [
+            12,
+            64
+          ],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.012093546363600828,
+            "p95_monitor_loss": 0.027960354731092655,
+            "all_bus_unsafe_fraction": 0.326268115942029,
+            "all_bus_undervoltage_fraction": 0.326268115942029,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.06077024868407843,
+            "min_voltage": 0.8892297513159215,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.11858136861550513
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.004169161602947236,
+              "p95_monitor_loss": 0.01644552054830433,
+              "all_bus_unsafe_fraction": 0.08949275362318841,
+              "all_bus_undervoltage_fraction": 0.08949275362318841,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.039644957131173886,
+              "min_voltage": 0.9103550428688261,
+              "max_voltage": 1.0249979704214391,
+              "ms_per_unique_context": 0.4501363637797168,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.0013902173093786653,
+              "p95_monitor_loss": 0.008521703761149468,
+              "all_bus_unsafe_fraction": 0.025,
+              "all_bus_undervoltage_fraction": 0.025,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.026357100660513333,
+              "min_voltage": 0.9236428993394866,
+              "max_voltage": 1.0208757767767842,
+              "ms_per_unique_context": 7.617700000220353,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 4829.818181818182,
+              "raw_wire_bytes_per_unique_context": 18886.81818181818
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.0013902173093786653,
+              "p95_monitor_loss": 0.008521703761149468,
+              "all_bus_unsafe_fraction": 0.025,
+              "all_bus_undervoltage_fraction": 0.025,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.026357100660513333,
+              "min_voltage": 0.9236428993394866,
+              "max_voltage": 1.0208757767767842,
+              "ms_per_unique_context": 7.722303030415347,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 4829.818181818182,
+              "raw_wire_bytes_per_unique_context": 18886.81818181818
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.002778944293568571,
+                "day_block_ci95": [
+                  0.00266922767035888,
+                  0.0028903149745219616
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0644927536231884,
+                "day_block_ci95": [
+                  0.05489130434782609,
+                  0.07427536231884058
+                ]
+              },
+              "different_dispatch_fraction": 1.0
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.0
+            }
+          }
+        },
+        {
+          "condition": "pcc_derating",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 33,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 33,
+              "observed_buses": [
+                12,
+                64
+              ],
+              "q_limits_pu": {
+                "65": [
+                  -0.05,
+                  0.0
+                ]
+              }
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 26,
+              "intervals": 4652
+            },
+            "qualified": {
+              "unique_contexts": 7,
+              "intervals": 868
+            }
+          },
+          "observed_buses": [
+            12,
+            64
+          ],
+          "q_limits_pu": {
+            "65": [
+              -0.05,
+              0.0
+            ]
+          },
+          "uncontrolled": {
+            "mean_monitor_loss": 0.012093546363600828,
+            "p95_monitor_loss": 0.027960354731092655,
+            "all_bus_unsafe_fraction": 0.326268115942029,
+            "all_bus_undervoltage_fraction": 0.326268115942029,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.06077024868407843,
+            "min_voltage": 0.8892297513159215,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.11858136861550513
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.00596604753492214,
+              "p95_monitor_loss": 0.019806760766277978,
+              "all_bus_unsafe_fraction": 0.15706521739130436,
+              "all_bus_undervoltage_fraction": 0.15706521739130436,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.04603165317158853,
+              "min_voltage": 0.9039683468284114,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 0.29879999970999604,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.0028693481039157934,
+              "p95_monitor_loss": 0.01337623109862708,
+              "all_bus_unsafe_fraction": 0.051268115942028986,
+              "all_bus_undervoltage_fraction": 0.051268115942028986,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.03400770321798652,
+              "min_voltage": 0.9159922967820134,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 5.864284848388651,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 4879.272727272727,
+              "raw_wire_bytes_per_unique_context": 18936.272727272728
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.002868756157310485,
+              "p95_monitor_loss": 0.01337623109862708,
+              "all_bus_unsafe_fraction": 0.051268115942028986,
+              "all_bus_undervoltage_fraction": 0.051268115942028986,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.03400770321798652,
+              "min_voltage": 0.9159922967820134,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 6.011760606105037,
+              "neighbor_messages_per_unique_context": 6.666666666666667,
+              "wire_bytes_per_unique_context": 4883.272727272727,
+              "raw_wire_bytes_per_unique_context": 18940.272727272728
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.0030972913776116553,
+                "day_block_ci95": [
+                  0.0029926152330092292,
+                  0.003206801982565505
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.10579710144927536,
+                "day_block_ci95": [
+                  0.09691123188405797,
+                  0.11458786231884058
+                ]
+              },
+              "different_dispatch_fraction": 1.0
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 5.919466053085695e-07,
+                "day_block_ci95": [
+                  5.191996454636385e-07,
+                  6.756668101298668e-07
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.1572463768115942
+            }
+          }
+        },
+        {
+          "condition": "telemetry_outage",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 4,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 4,
+              "observed_buses": [],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 4,
+              "intervals": 5520
+            }
+          },
+          "observed_buses": [],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.012093546363600828,
+            "p95_monitor_loss": 0.027960354731092655,
+            "all_bus_unsafe_fraction": 0.326268115942029,
+            "all_bus_undervoltage_fraction": 0.326268115942029,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.06077024868407843,
+            "min_voltage": 0.8892297513159215,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.11858136861550513
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.004169161602947236,
+              "p95_monitor_loss": 0.01644552054830433,
+              "all_bus_unsafe_fraction": 0.08949275362318841,
+              "all_bus_undervoltage_fraction": 0.08949275362318841,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.039644957131173886,
+              "min_voltage": 0.9103550428688261,
+              "max_voltage": 1.0249979704214391,
+              "ms_per_unique_context": 0.33984999936365057,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.0013873617900559308,
+              "p95_monitor_loss": 0.008521703761149468,
+              "all_bus_unsafe_fraction": 0.025,
+              "all_bus_undervoltage_fraction": 0.025,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.026357100660513333,
+              "min_voltage": 0.9236428993394866,
+              "max_voltage": 1.0208757767767842,
+              "ms_per_unique_context": 18.23289999992994,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 4814.0,
+              "raw_wire_bytes_per_unique_context": 18871.0
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.0013873617900559308,
+              "p95_monitor_loss": 0.008521703761149468,
+              "all_bus_unsafe_fraction": 0.025,
+              "all_bus_undervoltage_fraction": 0.025,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.026357100660513333,
+              "min_voltage": 0.9236428993394866,
+              "max_voltage": 1.0208757767767842,
+              "ms_per_unique_context": 18.96212500105321,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 4814.0,
+              "raw_wire_bytes_per_unique_context": 18871.0
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.002781799812891305,
+                "day_block_ci95": [
+                  0.002671613432338977,
+                  0.002893126962006732
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0644927536231884,
+                "day_block_ci95": [
+                  0.05489130434782609,
+                  0.07427536231884058
+                ]
+              },
+              "different_dispatch_fraction": 1.0
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.0
+            }
+          }
+        },
+        {
+          "condition": "outage_derating_recovery",
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "unique_contexts": 66,
+          "operating_modes": [
+            {
+              "intervals": 4112,
+              "unique_contexts": 33,
+              "observed_buses": [
+                12,
+                64
+              ],
+              "q_limits_pu": {}
+            },
+            {
+              "intervals": 640,
+              "unique_contexts": 28,
+              "observed_buses": [
+                12,
+                64
+              ],
+              "q_limits_pu": {
+                "65": [
+                  -0.05,
+                  0.0
+                ]
+              }
+            },
+            {
+              "intervals": 256,
+              "unique_contexts": 2,
+              "observed_buses": [],
+              "q_limits_pu": {}
+            },
+            {
+              "intervals": 512,
+              "unique_contexts": 3,
+              "observed_buses": [],
+              "q_limits_pu": {
+                "65": [
+                  -0.05,
+                  0.0
+                ]
+              }
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 60,
+              "intervals": 5429
+            },
+            "qualified": {
+              "unique_contexts": 6,
+              "intervals": 91
+            }
+          },
+          "uncontrolled": {
+            "mean_monitor_loss": 0.012093546363600828,
+            "p95_monitor_loss": 0.027960354731092655,
+            "all_bus_unsafe_fraction": 0.326268115942029,
+            "all_bus_undervoltage_fraction": 0.326268115942029,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.06077024868407843,
+            "min_voltage": 0.8892297513159215,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.11858136861550513
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.004540402301536284,
+              "p95_monitor_loss": 0.017344572462350178,
+              "all_bus_unsafe_fraction": 0.10471014492753623,
+              "all_bus_undervoltage_fraction": 0.10471014492753623,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.039644957131173886,
+              "min_voltage": 0.9103550428688261,
+              "max_voltage": 1.0239325946585955,
+              "ms_per_unique_context": 0.3218242424433508,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.0017011084650128572,
+              "p95_monitor_loss": 0.00996814547518326,
+              "all_bus_unsafe_fraction": 0.03061594202898551,
+              "all_bus_undervoltage_fraction": 0.03061594202898551,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.02745531647253563,
+              "min_voltage": 0.9225446835274643,
+              "max_voltage": 1.0208757767767842,
+              "ms_per_unique_context": 7.3447560604990665,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 4853.0,
+              "raw_wire_bytes_per_unique_context": 18910.0
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.0017010341045485995,
+              "p95_monitor_loss": 0.00996814547518326,
+              "all_bus_unsafe_fraction": 0.03061594202898551,
+              "all_bus_undervoltage_fraction": 0.03061594202898551,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.02745531647253563,
+              "min_voltage": 0.9225446835274643,
+              "max_voltage": 1.0208757767767842,
+              "ms_per_unique_context": 7.800959090948736,
+              "neighbor_messages_per_unique_context": 5.393939393939394,
+              "wire_bytes_per_unique_context": 4855.090909090909,
+              "raw_wire_bytes_per_unique_context": 18912.090909090908
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.002839368196987684,
+                "day_block_ci95": [
+                  0.0027315136130313263,
+                  0.0029411650955937442
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.07409420289855072,
+                "day_block_ci95": [
+                  0.06594202898550725,
+                  0.08288496376811594
+                ]
+              },
+              "different_dispatch_fraction": 1.0
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 7.436046425726344e-08,
+                "day_block_ci95": [
+                  3.231163637021809e-08,
+                  1.2355992447965093e-07
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.01648550724637681
+            }
+          }
+        },
+        {
+          "condition": "heavy_demand",
+          "load_scale": 0.9,
+          "pv_scale": 0.8,
+          "slack": 1.02,
+          "unique_contexts": 35,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 35,
+              "observed_buses": [
+                12,
+                64
+              ],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 35,
+              "intervals": 5520
+            }
+          },
+          "observed_buses": [
+            12,
+            64
+          ],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.029012595697868484,
+            "p95_monitor_loss": 0.05776213465223883,
+            "all_bus_unsafe_fraction": 0.8244565217391304,
+            "all_bus_undervoltage_fraction": 0.8244565217391304,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.12411756915943839,
+            "min_voltage": 0.8258824308405616,
+            "max_voltage": 1.02,
+            "head_export_intervals": 0,
+            "head_export_fraction": 0.0,
+            "minimum_head_active_power_pu": 0.23249004938282908
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.01585161312942523,
+              "p95_monitor_loss": 0.03688110623368445,
+              "all_bus_unsafe_fraction": 0.4769927536231884,
+              "all_bus_undervoltage_fraction": 0.4769927536231884,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.09922958025871698,
+              "min_voltage": 0.850770419741283,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 0.3085971431573853,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.010299074788660182,
+              "p95_monitor_loss": 0.03455707459840178,
+              "all_bus_unsafe_fraction": 0.3481884057971015,
+              "all_bus_undervoltage_fraction": 0.3481884057971015,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.08246355830047358,
+              "min_voltage": 0.8675364416995264,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 6.585848571350133,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 4937.0,
+              "raw_wire_bytes_per_unique_context": 18890.0
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.010299074788660182,
+              "p95_monitor_loss": 0.03455707459840178,
+              "all_bus_unsafe_fraction": 0.3481884057971015,
+              "all_bus_undervoltage_fraction": 0.3481884057971015,
+              "all_bus_overvoltage_fraction": 0.0,
+              "worst_all_bus_limit_excess": 0.08246355830047358,
+              "min_voltage": 0.8675364416995264,
+              "max_voltage": 1.02,
+              "ms_per_unique_context": 6.7487257141952535,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 4937.0,
+              "raw_wire_bytes_per_unique_context": 18890.0
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.0055525383407650526,
+                "day_block_ci95": [
+                  0.005445553538118887,
+                  0.005662265988716668
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.12880434782608696,
+                "day_block_ci95": [
+                  0.11720108695652173,
+                  0.13967391304347826
+                ]
+              },
+              "different_dispatch_fraction": 1.0
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.0,
+                "day_block_ci95": [
+                  0.0,
+                  0.0
+                ]
+              },
+              "different_dispatch_fraction": 0.0
+            }
+          },
+          "capacity_oracle_subset": {
+            "test_day_offsets": [
+              0,
+              28,
+              57,
+              85,
+              114
+            ],
+            "intervals": 240,
+            "feasible_joint_commands": 250,
+            "counts": {
+              "equal_split": {
+                "safe": 127,
+                "unsafe_but_feasible": 33,
+                "unsafe_for_every_feasible_action": 80
+              },
+              "legacy": {
+                "safe": 160,
+                "unsafe_but_feasible": 0,
+                "unsafe_for_every_feasible_action": 80
+              },
+              "adaptive": {
+                "safe": 160,
+                "unsafe_but_feasible": 0,
+                "unsafe_for_every_feasible_action": 80
+              }
+            },
+            "protocol": "Small-fleet offline diagnostic. Test every budget-feasible station combination with nonlinear AC using the true continuous injections on five evenly spaced test days. Safe means every bus is in [0.95,1.05]. Counts refer only to these intervals."
+          }
+        },
+        {
+          "condition": "solar_export",
+          "load_scale": 0.65,
+          "pv_scale": 7.5,
+          "slack": 1.045,
+          "unique_contexts": 30,
+          "operating_modes": [
+            {
+              "intervals": 5520,
+              "unique_contexts": 30,
+              "observed_buses": [
+                12,
+                64
+              ],
+              "q_limits_pu": {}
+            }
+          ],
+          "adaptive_selected_policy": {
+            "incumbent": {
+              "unique_contexts": 27,
+              "intervals": 5333
+            },
+            "qualified": {
+              "unique_contexts": 3,
+              "intervals": 187
+            }
+          },
+          "observed_buses": [
+            12,
+            64
+          ],
+          "q_limits_pu": {},
+          "uncontrolled": {
+            "mean_monitor_loss": 0.007233324606390659,
+            "p95_monitor_loss": 0.02446244342230965,
+            "all_bus_unsafe_fraction": 0.1230072463768116,
+            "all_bus_undervoltage_fraction": 0.028985507246376812,
+            "all_bus_overvoltage_fraction": 0.09402173913043478,
+            "worst_all_bus_limit_excess": 0.03168548893774947,
+            "min_voltage": 0.9183145110622505,
+            "max_voltage": 1.0717830139342504,
+            "head_export_intervals": 1189,
+            "head_export_fraction": 0.21539855072463768,
+            "minimum_head_active_power_pu": -0.39472499388807974
+          },
+          "policies": {
+            "equal_split": {
+              "mean_monitor_loss": 0.005338495056077431,
+              "p95_monitor_loss": 0.01929224704479374,
+              "all_bus_unsafe_fraction": 0.06521739130434782,
+              "all_bus_undervoltage_fraction": 0.017210144927536232,
+              "all_bus_overvoltage_fraction": 0.04800724637681159,
+              "worst_all_bus_limit_excess": 0.030358344040545826,
+              "min_voltage": 0.9196416559594541,
+              "max_voltage": 1.0670381399365165,
+              "ms_per_unique_context": 0.3058466669851138,
+              "neighbor_messages_per_unique_context": 0.0,
+              "wire_bytes_per_unique_context": 0.0,
+              "raw_wire_bytes_per_unique_context": 0.0
+            },
+            "legacy": {
+              "mean_monitor_loss": 0.0033594600497971468,
+              "p95_monitor_loss": 0.017868371740763597,
+              "all_bus_unsafe_fraction": 0.028442028985507246,
+              "all_bus_undervoltage_fraction": 0.0010869565217391304,
+              "all_bus_overvoltage_fraction": 0.027355072463768115,
+              "worst_all_bus_limit_excess": 0.013724784062933537,
+              "min_voltage": 0.9375301929829016,
+              "max_voltage": 1.0637247840629336,
+              "ms_per_unique_context": 8.815786666673375,
+              "neighbor_messages_per_unique_context": 4.0,
+              "wire_bytes_per_unique_context": 5015.0,
+              "raw_wire_bytes_per_unique_context": 18913.0
+            },
+            "adaptive": {
+              "mean_monitor_loss": 0.0033281865038172795,
+              "p95_monitor_loss": 0.017868371740763597,
+              "all_bus_unsafe_fraction": 0.02826086956521739,
+              "all_bus_undervoltage_fraction": 0.0010869565217391304,
+              "all_bus_overvoltage_fraction": 0.02717391304347826,
+              "worst_all_bus_limit_excess": 0.013724784062933537,
+              "min_voltage": 0.9375301929829016,
+              "max_voltage": 1.0637247840629336,
+              "ms_per_unique_context": 8.756263333392175,
+              "neighbor_messages_per_unique_context": 4.4,
+              "wire_bytes_per_unique_context": 5015.8,
+              "raw_wire_bytes_per_unique_context": 18913.8
+            }
+          },
+          "paired_improvement_over": {
+            "equal_split": {
+              "mean_monitor_loss": {
+                "mean": 0.0020103085522601523,
+                "day_block_ci95": [
+                  0.0018878928021350571,
+                  0.0021266513565619295
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.03695652173913044,
+                "day_block_ci95": [
+                  0.029528985507246377,
+                  0.04538496376811594
+                ]
+              },
+              "different_dispatch_fraction": 0.9827898550724637
+            },
+            "legacy": {
+              "mean_monitor_loss": {
+                "mean": 3.1273545979866864e-05,
+                "day_block_ci95": [
+                  2.144689697260984e-05,
+                  4.3917926832464665e-05
+                ]
+              },
+              "all_bus_unsafe_fraction": {
+                "mean": 0.00018115942028985507,
+                "day_block_ci95": [
+                  0.0,
+                  0.0005434782608695652
+                ]
+              },
+              "different_dispatch_fraction": 0.0338768115942029
+            }
+          }
+        }
+      ],
+      "fits": [
+        {
+          "load_scale": 0.65,
+          "pv_scale": 1.5,
+          "slack": 1.02,
+          "train_intervals": 7680,
+          "qualification_intervals": 3072,
+          "qualified_archive_commands": 14,
+          "fit_seconds": 3.0999737000020104
+        },
+        {
+          "load_scale": 0.9,
+          "pv_scale": 0.8,
+          "slack": 1.02,
+          "train_intervals": 7680,
+          "qualification_intervals": 3072,
+          "qualified_archive_commands": 7,
+          "fit_seconds": 3.2473294000010355
+        },
+        {
+          "load_scale": 0.65,
+          "pv_scale": 7.5,
+          "slack": 1.045,
+          "train_intervals": 7680,
+          "qualification_intervals": 3072,
+          "qualified_archive_commands": 18,
+          "fit_seconds": 3.582303999999567
+        }
+      ],
+      "topology": {
+        "topology": "case69",
+        "buses": 69,
+        "closed_branch_count": 68,
+        "closed_tie": null,
+        "opened_section": null,
+        "max_depth": 26,
+        "max_path_impedance_pu": 0.59313956812477,
+        "max_path_impedance_bus": 27,
+        "leaf_buses": [
+          27,
+          35,
+          46,
+          50,
+          52,
+          65,
+          67,
+          69
+        ],
+        "base_mva": 10.0,
+        "base_kv": 12.66,
+        "source_url": "https://github.com/MATPOWER/matpower/blob/b6c85b0323d20fb801cab3377c803a285d730847/data/case69.m"
+      }
+    }
+  },
+  "cases": 24,
+  "macro_policy_metrics": {
+    "equal_split": {
+      "mean_monitor_loss": 0.00345216372408247,
+      "all_bus_unsafe_fraction": 0.06163194444444445,
+      "average_case_p95_monitor_loss": 0.012707867490252196,
+      "ms_per_unique_context": 0.32093818407163743,
+      "neighbor_messages_per_unique_context": 0.0,
+      "wire_bytes_per_unique_context": 0.0,
+      "raw_wire_bytes_per_unique_context": 0.0
+    },
+    "legacy": {
+      "mean_monitor_loss": 0.0021611492850693416,
+      "all_bus_unsafe_fraction": 0.034918478260869565,
+      "average_case_p95_monitor_loss": 0.009084550251886288,
+      "ms_per_unique_context": 5.7735114427921514,
+      "neighbor_messages_per_unique_context": 4.0,
+      "wire_bytes_per_unique_context": 3921.2251243781093,
+      "raw_wire_bytes_per_unique_context": 12632.575870646766
+    },
+    "adaptive": {
+      "mean_monitor_loss": 0.0021595615058680484,
+      "all_bus_unsafe_fraction": 0.034918478260869565,
+      "average_case_p95_monitor_loss": 0.009079917906840283,
+      "ms_per_unique_context": 5.957466666695294,
+      "neighbor_messages_per_unique_context": 4.373134328358209,
+      "wire_bytes_per_unique_context": 3921.9415422885572,
+      "raw_wire_bytes_per_unique_context": 12633.292288557213
+    }
+  },
+  "macro_paired_improvement_over": {
+    "equal_split": {
+      "mean_monitor_loss": {
+        "mean": 0.0012926022182144217,
+        "day_block_ci95": [
+          0.0012568764272667603,
+          0.001333788840810544
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            0.0012507181691556925,
+            0.001343887200029173
+          ],
+          "34": [
+            0.0012320582547456931,
+            0.0013679191574719222
+          ]
+        }
+      },
+      "all_bus_unsafe_fraction": {
+        "mean": 0.026713466183574876,
+        "day_block_ci95": [
+          0.025271739130434786,
+          0.028242564915458936
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            0.024429159118357486,
+            0.029393493357487917
+          ],
+          "34": [
+            0.022798346920289852,
+            0.03122376962560386
+          ]
+        }
+      }
+    },
+    "legacy": {
+      "mean_monitor_loss": {
+        "mean": 1.587779201293015e-06,
+        "day_block_ci95": [
+          6.19257193296661e-07,
+          2.405691526135917e-06
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            3.9071268743330287e-07,
+            2.6568934612140573e-06
+          ],
+          "34": [
+            5.163532464347279e-07,
+            2.6284116984187748e-06
+          ]
+        }
+      },
+      "all_bus_unsafe_fraction": {
+        "mean": 0.0,
+        "day_block_ci95": [
+          -3.0193236714975845e-05,
+          3.0193236714975845e-05
+        ],
+        "moving_block_ci95_by_days": {
+          "7": [
+            -3.0193236714975845e-05,
+            3.774154589371981e-05
+          ],
+          "34": [
+            -2.2644927536231884e-05,
+            2.2644927536231884e-05
+          ]
+        }
+      }
+    }
+  },
+  "protocol": [
+    "One measured Ausgrid household, lagged and scaled into synthetic nodal PQ series.",
+    "Each known load/PV/slack configuration is fit only on the early training window. Live derating and meter outage reuse the nominal fit.",
+    "In outage_derating_recovery the half-hour index modulo 336 determines both temporary events. Reports are unavailable in [116,164); the last PCC loses positive Q in [132,204). The original reports and capability return at the end of their respective windows.",
+    "Solar and slack stresses were chosen using uncontrolled AC to exercise both export and overvoltage on all four topologies. Conditions are equally weighted stress tests.",
+    "All policies receive the same clock, category reports, local capability and fleet budgets. Legacy and adaptive share the complete station action space; equal split has its legacy preset subset.",
+    "Metrics use nonlinear AC on the same continuous held-out PQ intervals. Head export uses negative real slack power from branch currents, including losses, before dispatch.",
+    "Each case and each half-hour have equal weight. Paired differences are comparator minus adaptive. 95% intervals resample entire days 500 times and retain pairing across all cases. Macro sensitivity intervals sample circular contiguous 7/34-day blocks to allow serial dependence from weather and the 33-day profile lags.",
+    "Wall times include context preparation and a local-transport solve per distinct context. Bytes count serialized neighbor messages, excluding sensor uplink and command delivery."
+  ],
+  "switch_replay": {
+    "protocol": "Three consecutive, prespecified blocks of whole held-out days. Both policies use the adaptive solver and identical inputs except the switch status. Updated selects the pre-calibrated model for the actual grid; frozen always selects the nominal grid model. Both sets of commands are replayed on the actual switched feeder. Steady-state half-hour AC; switch transients and status-detection delay excluded.",
+    "schedule": [
+      {
+        "topology": "ieee33",
+        "days": 39,
+        "intervals": 1872
+      },
+      {
+        "topology": "ieee33_tie_8_21",
+        "days": 38,
+        "intervals": 1824
+      },
+      {
+        "topology": "ieee33_tie_18_33",
+        "days": 38,
+        "intervals": 1824
+      }
+    ],
+    "conditions": {
+      "nominal": {
+        "policies_full_window": {
+          "status_updated": {
+            "mean_monitor_loss": 0.00018277863568638488,
+            "p95_monitor_loss": 0.001041121898080025,
+            "all_bus_unsafe_fraction": 0.0,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.0,
+            "min_voltage": 0.9636037973603865,
+            "max_voltage": 1.0201830585980831
+          },
+          "status_frozen": {
+            "mean_monitor_loss": 0.000230269224276104,
+            "p95_monitor_loss": 0.001500289723373062,
+            "all_bus_unsafe_fraction": 0.0,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.0,
+            "min_voltage": 0.9582352637433712,
+            "max_voltage": 1.0345122366876582
+          }
+        },
+        "paired_after_first_switch": {
+          "mean_monitor_loss": {
+            "mean": 7.186075905023279e-05,
+            "day_block_ci95": [
+              5.558749536061198e-05,
+              8.931080477305103e-05
+            ]
+          },
+          "all_bus_unsafe_fraction": {
+            "mean": 0.0,
+            "day_block_ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "changed_dispatches_after_first_switch": 3513,
+        "intervals_after_first_switch": 3648
+      },
+      "pcc_derating": {
+        "policies_full_window": {
+          "status_updated": {
+            "mean_monitor_loss": 0.00018330114884705724,
+            "p95_monitor_loss": 0.0010347278245805296,
+            "all_bus_unsafe_fraction": 0.0,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.0,
+            "min_voltage": 0.9636037973603865,
+            "max_voltage": 1.0201830585980831
+          },
+          "status_frozen": {
+            "mean_monitor_loss": 0.00022564771883691186,
+            "p95_monitor_loss": 0.0014834973565173483,
+            "all_bus_unsafe_fraction": 0.0,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.0,
+            "min_voltage": 0.9582352637433712,
+            "max_voltage": 1.0345122366876582
+          }
+        },
+        "paired_after_first_switch": {
+          "mean_monitor_loss": {
+            "mean": 6.407704669517472e-05,
+            "day_block_ci95": [
+              4.927027053500952e-05,
+              8.024100360920895e-05
+            ]
+          },
+          "all_bus_unsafe_fraction": {
+            "mean": 0.0,
+            "day_block_ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "changed_dispatches_after_first_switch": 3576,
+        "intervals_after_first_switch": 3648
+      },
+      "telemetry_outage": {
+        "policies_full_window": {
+          "status_updated": {
+            "mean_monitor_loss": 0.00018195119588441637,
+            "p95_monitor_loss": 0.0010308067850299401,
+            "all_bus_unsafe_fraction": 0.0,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.0,
+            "min_voltage": 0.9636037973603865,
+            "max_voltage": 1.02
+          },
+          "status_frozen": {
+            "mean_monitor_loss": 0.00020433354036236072,
+            "p95_monitor_loss": 0.001249465432448674,
+            "all_bus_unsafe_fraction": 0.0,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.0,
+            "min_voltage": 0.9582352637433712,
+            "max_voltage": 1.023709255468924
+          }
+        },
+        "paired_after_first_switch": {
+          "mean_monitor_loss": {
+            "mean": 3.386802124952105e-05,
+            "day_block_ci95": [
+              2.4019038580438864e-05,
+              4.331776792492703e-05
+            ]
+          },
+          "all_bus_unsafe_fraction": {
+            "mean": 0.0,
+            "day_block_ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "changed_dispatches_after_first_switch": 3648,
+        "intervals_after_first_switch": 3648
+      },
+      "outage_derating_recovery": {
+        "policies_full_window": {
+          "status_updated": {
+            "mean_monitor_loss": 0.00018253249365392482,
+            "p95_monitor_loss": 0.0010308067850299401,
+            "all_bus_unsafe_fraction": 0.0,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.0,
+            "min_voltage": 0.9636037973603865,
+            "max_voltage": 1.02
+          },
+          "status_frozen": {
+            "mean_monitor_loss": 0.00022459105008528914,
+            "p95_monitor_loss": 0.001472965327671281,
+            "all_bus_unsafe_fraction": 0.0,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.0,
+            "min_voltage": 0.9582352637433712,
+            "max_voltage": 1.0345122366876582
+          }
+        },
+        "paired_after_first_switch": {
+          "mean_monitor_loss": {
+            "mean": 6.364123670535385e-05,
+            "day_block_ci95": [
+              4.824164233917161e-05,
+              7.944007817905778e-05
+            ]
+          },
+          "all_bus_unsafe_fraction": {
+            "mean": 0.0,
+            "day_block_ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "changed_dispatches_after_first_switch": 3482,
+        "intervals_after_first_switch": 3648
+      },
+      "heavy_demand": {
+        "policies_full_window": {
+          "status_updated": {
+            "mean_monitor_loss": 0.008042997499900595,
+            "p95_monitor_loss": 0.030419290793327225,
+            "all_bus_unsafe_fraction": 0.09039855072463768,
+            "all_bus_undervoltage_fraction": 0.09039855072463768,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.02335021088381395,
+            "min_voltage": 0.926649789116186,
+            "max_voltage": 1.02
+          },
+          "status_frozen": {
+            "mean_monitor_loss": 0.008325657467148789,
+            "p95_monitor_loss": 0.030923784894491487,
+            "all_bus_unsafe_fraction": 0.12971014492753624,
+            "all_bus_undervoltage_fraction": 0.12971014492753624,
+            "all_bus_overvoltage_fraction": 0.0,
+            "worst_all_bus_limit_excess": 0.03455734686194489,
+            "min_voltage": 0.9154426531380551,
+            "max_voltage": 1.02
+          }
+        },
+        "paired_after_first_switch": {
+          "mean_monitor_loss": {
+            "mean": 0.00042770916096766186,
+            "day_block_ci95": [
+              0.00035883685254025797,
+              0.0004868311778311711
+            ]
+          },
+          "all_bus_unsafe_fraction": {
+            "mean": 0.059484649122807015,
+            "day_block_ci95": [
+              0.04331140350877193,
+              0.07375274122807016
+            ]
+          }
+        },
+        "changed_dispatches_after_first_switch": 2885,
+        "intervals_after_first_switch": 3648
+      },
+      "solar_export": {
+        "policies_full_window": {
+          "status_updated": {
+            "mean_monitor_loss": 0.0012824985282818683,
+            "p95_monitor_loss": 0.009602942834593264,
+            "all_bus_unsafe_fraction": 0.02572463768115942,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.02572463768115942,
+            "worst_all_bus_limit_excess": 0.00902910745318275,
+            "min_voltage": 0.9539144459087934,
+            "max_voltage": 1.0590291074531828
+          },
+          "status_frozen": {
+            "mean_monitor_loss": 0.0017301729337614391,
+            "p95_monitor_loss": 0.010140410608346402,
+            "all_bus_unsafe_fraction": 0.02572463768115942,
+            "all_bus_undervoltage_fraction": 0.0,
+            "all_bus_overvoltage_fraction": 0.02572463768115942,
+            "worst_all_bus_limit_excess": 0.00902910745318275,
+            "min_voltage": 0.9539899068559047,
+            "max_voltage": 1.0590291074531828
+          }
+        },
+        "paired_after_first_switch": {
+          "mean_monitor_loss": {
+            "mean": 0.0006774020609230348,
+            "day_block_ci95": [
+              0.0006014934644511978,
+              0.0007655509661500414
+            ]
+          },
+          "all_bus_unsafe_fraction": {
+            "mean": 0.0,
+            "day_block_ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "changed_dispatches_after_first_switch": 3037,
+        "intervals_after_first_switch": 3648
+      }
+    }
+  }
+}

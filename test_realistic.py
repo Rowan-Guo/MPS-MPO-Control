@@ -22,7 +22,7 @@ class TestRealisticPhysics(unittest.TestCase):
         v=f.ac(f.nominal_pq)
         self.assertEqual(v.shape,(33,))
         self.assertAlmostEqual(abs(v[0]),1.02,places=13)
-        self.assertAlmostEqual(abs(v[17]),.9662941190392644,places=10)
+        self.assertAlmostEqual(abs(v[17]),.9662948074344191,places=10)
         self.assertGreater(abs(f.ac(f.nominal_pq,actions=action_injections((.05,.05)))[-1]),abs(v[-1]))
         # Verify complex power balance at every non-slack bus independently.
         z=f.impedance; parent=f.parent

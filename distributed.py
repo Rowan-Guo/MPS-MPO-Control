@@ -9,7 +9,9 @@ The terminal adds the conditional expected voltage loss supplied by the caller.
 from dataclasses import dataclass
 import json
 import multiprocessing
+import struct
 from typing import Sequence
+import zlib
 
 import numpy as np
 
@@ -34,10 +36,24 @@ class DispatchResult:
 
 
 def _encode(payload):
-    return json.dumps(payload, separators=(",", ":"), allow_nan=False).encode("utf-8")
+    raw = json.dumps(payload, separators=(",", ":"), allow_nan=False).encode("utf-8")
+    if len(raw) >= 512:
+        packed = b"Z" + struct.pack("<I", len(raw)) + zlib.compress(raw, level=1)
+        if len(packed) < len(raw):
+            return packed
+    return raw
+
+
+def _raw_size(data):
+    return struct.unpack_from("<I", data, 1)[0] if data.startswith(b"Z") else len(data)
 
 
 def _decode(data):
+    if data.startswith(b"Z"):
+        expected = _raw_size(data)
+        data = zlib.decompress(data[5:])
+        if len(data) != expected:
+            raise ValueError("inconsistent boundary message length")
     payload = json.loads(data)
     if isinstance(payload, dict) and "error" in payload:
         raise ValueError(payload["error"])
@@ -72,8 +88,8 @@ class StationAgent:
             raise ValueError("invalid resource table at bus %s" % station.bus)
         self.moves = []
         for i in np.flatnonzero(available):
-            increments = tuple(map(int, np.rint(shifts[i] / tick))) + tuple(map(int, resources[i]))
-            self.moves.append((int(i), increments, float(costs[i])))
+            increments = tuple(map(int, np.rint(shifts[i] / tick)))
+            self.moves.append((int(i), increments, tuple(map(int, resources[i])), float(costs[i])))
         self.tick = tick
         self.monitors = monitors
         self.limits = limits
@@ -86,15 +102,26 @@ class StationAgent:
         previous = [(origin, 0.0)] if message is None else _decode(message)
         self.parents.clear()
         self.costs.clear()
+        # Many different voltage boundaries have the same residual budget.
+        # Reject unaffordable moves before constructing a long voltage vector.
+        feasible_by_usage = {}
         for boundary, cost in previous:
-            for action, shift, local_cost in self.moves:
-                state = tuple(x + dx for x, dx in zip(boundary, shift, strict=True))
-                if any(used > cap for used, cap in zip(state[self.monitors:], self.limits)):
-                    continue
+            boundary = tuple(boundary)
+            usage = boundary[self.monitors:]
+            moves = feasible_by_usage.get(usage)
+            if moves is None:
+                moves = []
+                for action, shift, required, local_cost in self.moves:
+                    next_usage = tuple(x + y for x, y in zip(usage, required))
+                    if all(x <= cap for x, cap in zip(next_usage, self.limits)):
+                        moves.append((action, shift, next_usage, local_cost))
+                feasible_by_usage[usage] = moves
+            for action, shift, next_usage, local_cost in moves:
+                state = tuple(x + dx for x, dx in zip(boundary, shift)) + next_usage
                 candidate = cost + local_cost
                 if candidate < self.costs.get(state, float("inf")):
                     self.costs[state] = candidate
-                    self.parents[state] = (tuple(boundary), action)
+                    self.parents[state] = (boundary, action)
         if not self.costs:
             raise ValueError("no feasible sequence of available actions fits shared resource limits")
 
@@ -133,6 +160,7 @@ def _local_sweeps(stations, risk, tick, caps, monitors):
     agents = []
     message = None
     sent = 0
+    raw_sent = 0
     counts = []
     for i, station in enumerate(stations):
         agent = StationAgent(station, tick, caps, monitors)
@@ -142,6 +170,7 @@ def _local_sweeps(stations, risk, tick, caps, monitors):
         if i + 1 < len(stations):
             message = agent.offer()
             sent += len(message)
+            raw_sent += _raw_size(message)
     final, objective = agents[-1].finish(risk)
     state = final
     indices = []
@@ -151,8 +180,9 @@ def _local_sweeps(stations, risk, tick, caps, monitors):
         if i:
             message = _encode(state)
             sent += len(message)
+            raw_sent += _raw_size(message)
             state = _decode(message)
-    return tuple(reversed(indices)), final, objective, counts, sent
+    return tuple(reversed(indices)), final, objective, counts, sent, raw_sent
 
 
 def _receive(link, timeout):
@@ -170,11 +200,13 @@ def _worker(station, tick, caps, monitors, upstream, downstream, report, timeout
         downstream.send_bytes(offer)
         state, index = agent.traceback(_decode(_receive(downstream, timeout)))
         sent = len(offer)
+        raw_sent = _raw_size(offer)
         if upstream is not None:
             response = _encode(state)
             upstream.send_bytes(response)
             sent += len(response)
-        report.send((index, len(agent.costs), sent))
+            raw_sent += _raw_size(response)
+        report.send((index, len(agent.costs), sent, raw_sent))
     except Exception as exc:
         downstream.send_bytes(_encode({"error": str(exc)}))
     finally:
@@ -214,20 +246,23 @@ def _process_sweeps(stations, risk, tick, caps, monitors, timeout):
         final, objective = terminal.finish(risk)
         previous, last_index = terminal.traceback(final)
         sent = 0
+        raw_sent = 0
         if incoming is not None:
             response = _encode(previous)
             incoming.send_bytes(response)
             sent += len(response)
+            raw_sent += _raw_size(response)
         # Supervisor reads the chosen actions solely to collect the simulation output.
         choices, counts = [], []
         for receiver in reports:
             if not receiver.poll(timeout):
                 raise TimeoutError("station timed out reporting its selected action")
-            index, size, payload = receiver.recv()
+            index, size, payload, raw_payload = receiver.recv()
             choices.append(index)
             counts.append(size)
             sent += payload
-        return tuple(choices + [last_index]), final, objective, counts + [len(terminal.costs)], sent
+            raw_sent += raw_payload
+        return tuple(choices + [last_index]), final, objective, counts + [len(terminal.costs)], sent, raw_sent
     finally:
         if incoming is not None:
             incoming.close()
@@ -247,7 +282,8 @@ def solve_dispatch(stations, risk, *, tick=0.0001, resource_limits=(), transport
     The risk callback accepts an (n_boundaries, n_monitors) array of *quantized*
     voltage increments and returns one scalar per row. Local action increments
     use nearest ticks (ties to even). An optional resource ledger enforces exact
-    integer budgets. Both transports use identical JSON neighbor messages. In
+    integer budgets. Both transports use identical neighbor messages, with
+    lossless compression of large JSON payloads when it saves bytes. In
     process mode call from an importable module with a guarded main on Windows.
     """
     stations = tuple(stations)
@@ -269,11 +305,11 @@ def solve_dispatch(stations, risk, *, tick=0.0001, resource_limits=(), transport
         result = _process_sweeps(stations, risk, tick, caps, monitors, timeout)
     else:
         raise ValueError("transport must be 'local' or 'process'")
-    indices, final, objective, counts, wire_bytes = result
+    indices, final, objective, counts, wire_bytes, raw_wire_bytes = result
     actions = tuple(tuple(map(float, s.actions[i])) for s, i in zip(stations, indices))
     diagnostics = dict(messages=2*(len(stations)-1), forward_messages=len(stations)-1,
                        backward_messages=len(stations)-1, forward_entries=counts[:-1],
-                       terminal_entries=counts[-1], wire_bytes=wire_bytes, tick=tick,
+                       terminal_entries=counts[-1], wire_bytes=wire_bytes, raw_wire_bytes=raw_wire_bytes, tick=tick,
                        max_voltage_rounding_error=len(stations)*tick/2,
                        resources_used=final[monitors:], transport=transport)
     return DispatchResult(indices, actions, tuple(x*tick for x in final[:monitors]),
