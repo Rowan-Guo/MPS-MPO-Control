@@ -1,12 +1,10 @@
-"""Sample-learned, nonnegative classical probability MPS (tensor train).
+"""Sample-learned, nonnegative probability MPS / tensor train.
 
-A finite mixture of K categorical product distributions is learned by EM from
-complete NORMAL-COMMUNICATION training samples. Its *probability* tensor has
-an exact TT/MPS representation of bond rank <= K, without a 3**sites table.
-
-This differs from the original Born MPS: here p(x) itself is factored, rather
-than sqrt(p(x)). Expectations use ONE probability layer, not <psi|O|psi>.
-The contrast is deliberate and documented; no quantum advantage is claimed.
+Learns a K-component mixture of categorical product distributions by EM from
+complete historical load samples and converts it to a normalized probability TT
+with bond rank at most K. Supports direct single-layer conditional expectation
+contractions, complementing the Born-amplitude MPS used in the baseline.
+The full 3**sites joint probability table is never required.
 """
 from __future__ import annotations
 
