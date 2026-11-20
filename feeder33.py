@@ -32,10 +32,13 @@ BASE_KV = 12.66
 class Feeder33:
     slack: float = 1.02
     base_load_scale: float = 0.65
+    trunk_length_factor: float = 1.0
 
     def __post_init__(self):
         if not (0.95 <= self.slack <= 1.08 and 0.1 <= self.base_load_scale <= 2.0):
             raise ValueError("invalid feeder voltage/load scaling")
+        if not np.isfinite(self.trunk_length_factor) or self.trunk_length_factor <= 0:
+            raise ValueError("trunk length factor must be positive")
 
     @property
     def nominal_pq(self):
@@ -55,7 +58,9 @@ class Feeder33:
     def impedance(self):
         z=np.zeros(33,complex)
         for src,dst,r,x in CLOSED_BRANCHES:
-            z[int(dst)-1]=complex(r,x) / (BASE_KV**2 / BASE_MVA)
+            # Extend both R and X on the path 1--18 only. Keep all lateral spans.
+            length = self.trunk_length_factor if int(dst) <= 18 else 1.0
+            z[int(dst)-1]=length*complex(r,x) / (BASE_KV**2 / BASE_MVA)
         return z
 
     def ac(self, power, *, actions=(), max_iterations=120, tolerance=1e-10):
@@ -87,6 +92,39 @@ class Feeder33:
                 return vnew
             v=vnew
         raise RuntimeError("IEEE33 AC power flow failed to converge")
+
+    def ac_batch(self, powers, *, actions=(), max_iterations=120, tolerance=1e-10):
+        """Nonlinear AC solves for independent snapshots, vectorized over time.
+
+        All snapshots receive the same optional list of PCC injections. For
+        snapshot-specific dispatch the caller can subtract it from powers first.
+        """
+        loads = np.asarray(powers, dtype=float)
+        if loads.ndim != 3 or loads.shape[1:] != (33, 2) or not np.isfinite(loads).all():
+            raise ValueError("powers must have shape (samples,33,2) and finite values")
+        # Keep all timestamps for a bus contiguous in memory during branch sweeps.
+        s = np.ascontiguousarray((loads[:, :, 0] + 1j * loads[:, :, 1]).T)
+        s[0] = 0
+        for bus, p, q in actions:
+            if not 2 <= bus <= 33 or not np.isfinite([p, q]).all():
+                raise ValueError("invalid PCC injection")
+            s[bus - 1] -= complex(p, q)
+        v = np.full(s.shape, complex(self.slack))
+        if not len(loads):
+            return v.T
+        z, parent = self.impedance, self.parent
+        for _ in range(max_iterations):
+            currents = np.conj(s / v)
+            for k in range(32, 0, -1):
+                currents[parent[k]] += currents[k]
+            updated = np.empty_like(v)
+            updated[0] = self.slack
+            for k in range(1, 33):
+                updated[k] = updated[parent[k]] - z[k] * currents[k]
+            if np.max(np.abs(updated - v)) < tolerance:
+                return updated.T
+            v = updated
+        raise RuntimeError("batched IEEE33 AC power flow failed to converge")
 
 
 def action_injections(action, control_buses=(18,33)):

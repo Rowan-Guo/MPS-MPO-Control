@@ -1,0 +1,478 @@
+{
+  "profile_buses": [
+    6,
+    14,
+    18,
+    33
+  ],
+  "monitors": [
+    18,
+    33
+  ],
+  "seed": 20261120,
+  "description": "R and X scaled together only on branches 1--18; all laterals retained. Fixed original dispatch and independent station dispatch share aggregate budgets. Positive additional gain means larger absolute loss reduction than at 1x.",
+  "cases": [
+    {
+      "length_factor": 1.0,
+      "intervals": 5520,
+      "positive_q_at_33": true,
+      "sensitivity_dV_dQ_by_actuator": {
+        "14": [
+          0.09317129508301658,
+          0.38088840208838626,
+          0.3822037285969859,
+          0.09516541867460315
+        ],
+        "18": [
+          0.0936280740015949,
+          0.38259589763345314,
+          0.6016122180620975,
+          0.09563197398432255
+        ],
+        "33": [
+          0.09538709202205897,
+          0.09730967380094935,
+          0.09764571442227865,
+          0.3589446191245571
+        ]
+      },
+      "fixed_loss": 0.0002026122914245531,
+      "distributed_loss": 0.00020054418690768563,
+      "original_menu_oracle_loss": 0.0002011561156885227,
+      "original_menu_selection_regret": 1.4561757360303848e-06,
+      "rerouted_six_loss": 0.0002026122914245531,
+      "rerouted_six_any_bus_unsafe": 0.0,
+      "weekly_ci95_unsafe_fraction_reduction_vs_rerouting": [
+        0.0,
+        0.0
+      ],
+      "weekly_ci95_unsafe_fraction_reduction_vs_original": [
+        0.0,
+        0.0
+      ],
+      "improvement_over_rerouted_six": 2.068104516867422e-06,
+      "weekly_ci95_over_rerouted_six": [
+        -3.854437664064875e-06,
+        7.830602062659435e-06
+      ],
+      "improvement_over_original_menu_oracle": 6.119287808370367e-07,
+      "fixed_any_bus_unsafe": 0.0,
+      "distributed_any_bus_unsafe": 0.0,
+      "mean_loss_reduction": 2.068104516867422e-06,
+      "weekly_ci95_reduction": [
+        -3.854437664064875e-06,
+        7.830602062659435e-06
+      ],
+      "additional_gain_vs_1x": 0.0,
+      "weekly_ci95_additional_gain": [
+        0.0,
+        0.0
+      ],
+      "mean_deadband_excess_reduction_per_profile_bus": [
+        0.0,
+        -0.00024782317670588537,
+        -3.0138860534028907e-05,
+        3.4275069567763754e-05
+      ],
+      "mean_pq_by_actuator": {
+        "14": [
+          0.008029891304347631,
+          0.003695652173913064
+        ],
+        "18": [
+          0.0067753623188403994,
+          0.022173913043478356
+        ],
+        "33": [
+          0.03336956521739371,
+          0.01306612318840559
+        ]
+      }
+    },
+    {
+      "length_factor": 1.5,
+      "intervals": 5520,
+      "positive_q_at_33": true,
+      "sensitivity_dV_dQ_by_actuator": {
+        "14": [
+          0.14752742799106766,
+          0.5964133362782453,
+          0.5997001987122497,
+          0.15079943739881863
+        ],
+        "18": [
+          0.14868717627813943,
+          0.6007024160034069,
+          0.9408779872718265,
+          0.15198490798240538
+        ],
+        "33": [
+          0.14849008955053478,
+          0.1532875779065579,
+          0.15413235275119064,
+          0.4180756918438222
+        ]
+      },
+      "fixed_loss": 0.0029795082030294948,
+      "distributed_loss": 0.002979533613795175,
+      "original_menu_oracle_loss": 0.0029795082030294948,
+      "original_menu_selection_regret": 0.0,
+      "rerouted_six_loss": 0.0029795082030294948,
+      "rerouted_six_any_bus_unsafe": 0.005615942028985507,
+      "weekly_ci95_unsafe_fraction_reduction_vs_rerouting": [
+        0.0,
+        0.0
+      ],
+      "weekly_ci95_unsafe_fraction_reduction_vs_original": [
+        0.0,
+        0.0
+      ],
+      "improvement_over_rerouted_six": -2.5410765681046978e-08,
+      "weekly_ci95_over_rerouted_six": [
+        -1.3706500982274793e-07,
+        9.795085303410336e-08
+      ],
+      "improvement_over_original_menu_oracle": -2.5410765681046978e-08,
+      "fixed_any_bus_unsafe": 0.005615942028985507,
+      "distributed_any_bus_unsafe": 0.005615942028985507,
+      "mean_loss_reduction": -2.5410765681046978e-08,
+      "weekly_ci95_reduction": [
+        -1.3706500982274793e-07,
+        9.795085303410336e-08
+      ],
+      "additional_gain_vs_1x": -2.0935152825484688e-06,
+      "weekly_ci95_additional_gain": [
+        -7.93476933014041e-06,
+        3.9134265935455814e-06
+      ],
+      "mean_deadband_excess_reduction_per_profile_bus": [
+        0.0,
+        -1.766208060725004e-05,
+        -2.2604015252145818e-07,
+        1.7521862115936422e-07
+      ],
+      "mean_pq_by_actuator": {
+        "14": [
+          0.0034148550724637677,
+          0.005357789855072353
+        ],
+        "18": [
+          0.019252717391305484,
+          0.022010869565219165
+        ],
+        "33": [
+          0.027332427536233782,
+          0.02263134057971137
+        ]
+      }
+    },
+    {
+      "length_factor": 2.0,
+      "intervals": 5520,
+      "positive_q_at_33": true,
+      "sensitivity_dV_dQ_by_actuator": {
+        "14": [
+          0.2088469893331002,
+          0.8339930768482828,
+          0.8405480709303692,
+          0.21365775263371134
+        ],
+        "18": [
+          0.21120072851110727,
+          0.8425965979614869,
+          1.3138271066959195,
+          0.21606571066445923
+        ],
+        "33": [
+          0.2061672038375928,
+          0.21571604447068182,
+          0.2174115216043715,
+          0.4823835258415121
+        ]
+      },
+      "fixed_loss": 0.008957167197340625,
+      "distributed_loss": 0.008839550923389004,
+      "original_menu_oracle_loss": 0.008957167197340625,
+      "original_menu_selection_regret": 0.0,
+      "rerouted_six_loss": 0.008957167197340625,
+      "rerouted_six_any_bus_unsafe": 0.19547101449275361,
+      "weekly_ci95_unsafe_fraction_reduction_vs_rerouting": [
+        0.004347826086956522,
+        0.011529126213592233
+      ],
+      "weekly_ci95_unsafe_fraction_reduction_vs_original": [
+        0.004347826086956522,
+        0.011529126213592233
+      ],
+      "improvement_over_rerouted_six": 0.00011761627395162214,
+      "weekly_ci95_over_rerouted_six": [
+        0.00010846915716111306,
+        0.00012796786602892998
+      ],
+      "improvement_over_original_menu_oracle": 0.00011761627395162214,
+      "fixed_any_bus_unsafe": 0.19547101449275361,
+      "distributed_any_bus_unsafe": 0.18786231884057972,
+      "mean_loss_reduction": 0.00011761627395162207,
+      "weekly_ci95_reduction": [
+        0.00010846915716111302,
+        0.00012796786602892995
+      ],
+      "additional_gain_vs_1x": 0.00011554816943475464,
+      "weekly_ci95_additional_gain": [
+        0.0001045649872491136,
+        0.0001297208486628101
+      ],
+      "mean_deadband_excess_reduction_per_profile_bus": [
+        -5.6306890498331195e-05,
+        0.0007012350002757638,
+        0.0004922768800027587,
+        -0.0002570443320995146
+      ],
+      "mean_pq_by_actuator": {
+        "14": [
+          0.002250905797101469,
+          0.0043840579710144375
+        ],
+        "18": [
+          0.02997282608695921,
+          0.013423913043478211
+        ],
+        "33": [
+          0.017776268115942944,
+          0.03219202898551007
+        ]
+      }
+    },
+    {
+      "length_factor": 1.0,
+      "intervals": 5520,
+      "positive_q_at_33": false,
+      "sensitivity_dV_dQ_by_actuator": {
+        "14": [
+          0.09317129508301658,
+          0.38088840208838626,
+          0.3822037285969859,
+          0.09516541867460315
+        ],
+        "18": [
+          0.0936280740015949,
+          0.38259589763345314,
+          0.6016122180620975,
+          0.09563197398432255
+        ],
+        "33": [
+          0.09538709202205897,
+          0.09730967380094935,
+          0.09764571442227865,
+          0.3589446191245571
+        ]
+      },
+      "fixed_loss": 0.0025480122013105963,
+      "distributed_loss": 0.00020091221468431585,
+      "original_menu_oracle_loss": 0.0025480122013105963,
+      "original_menu_selection_regret": 0.0,
+      "rerouted_six_loss": 0.0008658384985269477,
+      "rerouted_six_any_bus_unsafe": 0.0,
+      "weekly_ci95_unsafe_fraction_reduction_vs_rerouting": [
+        0.0,
+        0.0
+      ],
+      "weekly_ci95_unsafe_fraction_reduction_vs_original": [
+        0.0,
+        0.0
+      ],
+      "improvement_over_rerouted_six": 0.0006649262838426318,
+      "weekly_ci95_over_rerouted_six": [
+        0.0006240233535040694,
+        0.0007037367720238552
+      ],
+      "improvement_over_original_menu_oracle": 0.0023470999866262803,
+      "fixed_any_bus_unsafe": 0.0,
+      "distributed_any_bus_unsafe": 0.0,
+      "mean_loss_reduction": 0.0023470999866262803,
+      "weekly_ci95_reduction": [
+        0.0022263044109808007,
+        0.0024621996492666717
+      ],
+      "additional_gain_vs_1x": 0.0,
+      "weekly_ci95_additional_gain": [
+        0.0,
+        0.0
+      ],
+      "mean_deadband_excess_reduction_per_profile_bus": [
+        8.300263677691155e-08,
+        0.001852014306038775,
+        0.002003501114791452,
+        0.002690698858461109
+      ],
+      "mean_pq_by_actuator": {
+        "14": [
+          0.005516304347826043,
+          0.010783514492753235
+        ],
+        "18": [
+          0.0006838768115942012,
+          0.02884963768116096
+        ],
+        "33": [
+          0.04314764492754027,
+          -0.0010416666666666693
+        ]
+      }
+    },
+    {
+      "length_factor": 1.5,
+      "intervals": 5520,
+      "positive_q_at_33": false,
+      "sensitivity_dV_dQ_by_actuator": {
+        "14": [
+          0.14752742799106766,
+          0.5964133362782453,
+          0.5997001987122497,
+          0.15079943739881863
+        ],
+        "18": [
+          0.14868717627813943,
+          0.6007024160034069,
+          0.9408779872718265,
+          0.15198490798240538
+        ],
+        "33": [
+          0.14849008955053478,
+          0.1532875779065579,
+          0.15413235275119064,
+          0.4180756918438222
+        ]
+      },
+      "fixed_loss": 0.013594383469025542,
+      "distributed_loss": 0.003045758362085237,
+      "original_menu_oracle_loss": 0.013594383469025542,
+      "original_menu_selection_regret": 0.0,
+      "rerouted_six_loss": 0.004078514092536513,
+      "rerouted_six_any_bus_unsafe": 0.018297101449275363,
+      "weekly_ci95_unsafe_fraction_reduction_vs_rerouting": [
+        0.0,
+        0.0009057971014492754
+      ],
+      "weekly_ci95_unsafe_fraction_reduction_vs_original": [
+        0.16195652173913044,
+        0.17980696729338033
+      ],
+      "improvement_over_rerouted_six": 0.0010327557304512759,
+      "weekly_ci95_over_rerouted_six": [
+        0.0009425860459519352,
+        0.0011198848245482956
+      ],
+      "improvement_over_original_menu_oracle": 0.010548625106940305,
+      "fixed_any_bus_unsafe": 0.1891304347826087,
+      "distributed_any_bus_unsafe": 0.017934782608695653,
+      "mean_loss_reduction": 0.010548625106940305,
+      "weekly_ci95_reduction": [
+        0.010211772249830027,
+        0.010875969991659091
+      ],
+      "additional_gain_vs_1x": 0.008201525120314024,
+      "weekly_ci95_additional_gain": [
+        0.007941151935244034,
+        0.008456759662937794
+      ],
+      "mean_deadband_excess_reduction_per_profile_bus": [
+        0.0017531000737948687,
+        0.013365942775527051,
+        0.013707968945664843,
+        0.007389281268215767
+      ],
+      "mean_pq_by_actuator": {
+        "14": [
+          4.528985507246376e-05,
+          0.007844202898550501
+        ],
+        "18": [
+          0.006263586956521577,
+          0.042155797101453146
+        ],
+        "33": [
+          0.04369112318840997,
+          0.0
+        ]
+      }
+    },
+    {
+      "length_factor": 2.0,
+      "intervals": 5520,
+      "positive_q_at_33": false,
+      "sensitivity_dV_dQ_by_actuator": {
+        "14": [
+          0.2088469893331002,
+          0.8339930768482828,
+          0.8405480709303692,
+          0.21365775263371134
+        ],
+        "18": [
+          0.21120072851110727,
+          0.8425965979614869,
+          1.3138271066959195,
+          0.21606571066445923
+        ],
+        "33": [
+          0.2061672038375928,
+          0.21571604447068182,
+          0.2174115216043715,
+          0.4823835258415121
+        ]
+      },
+      "fixed_loss": 0.030013373542263563,
+      "distributed_loss": 0.008391975321767251,
+      "original_menu_oracle_loss": 0.030013373542263563,
+      "original_menu_selection_regret": 0.0,
+      "rerouted_six_loss": 0.00985239086045151,
+      "rerouted_six_any_bus_unsafe": 0.21702898550724636,
+      "weekly_ci95_unsafe_fraction_reduction_vs_rerouting": [
+        -0.0026260504201680674,
+        0.00019470404984423675
+      ],
+      "weekly_ci95_unsafe_fraction_reduction_vs_original": [
+        0.2865942028985507,
+        0.3344619435612083
+      ],
+      "improvement_over_rerouted_six": 0.0014604155386842598,
+      "weekly_ci95_over_rerouted_six": [
+        0.0013661494072377011,
+        0.0015565612207252076
+      ],
+      "improvement_over_original_menu_oracle": 0.02162139822049631,
+      "fixed_any_bus_unsafe": 0.528804347826087,
+      "distributed_any_bus_unsafe": 0.21811594202898552,
+      "mean_loss_reduction": 0.021621398220496312,
+      "weekly_ci95_reduction": [
+        0.021349861042871104,
+        0.021864729320403387
+      ],
+      "additional_gain_vs_1x": 0.019274298233870033,
+      "weekly_ci95_additional_gain": [
+        0.019052342560531215,
+        0.01947511921191717
+      ],
+      "mean_deadband_excess_reduction_per_profile_bus": [
+        0.0070116026009618675,
+        0.025345675786121548,
+        0.03100046411928715,
+        0.012242332321705464
+      ],
+      "mean_pq_by_actuator": {
+        "14": [
+          0.0,
+          0.007758152173912796
+        ],
+        "18": [
+          0.01086956521739088,
+          0.04224184782609089
+        ],
+        "33": [
+          0.03913043478261225,
+          0.0
+        ]
+      }
+    }
+  ]
+}

@@ -13,6 +13,7 @@ import argparse
 import csv
 import json
 from pathlib import Path
+from time import perf_counter
 import numpy as np
 
 from feeder33 import Feeder33, action_injections, monitored_loss, unsafe_voltage
@@ -21,13 +22,14 @@ from measured_profiles import (DATA_PATH,SITES,OBSERVED_SITES,read_ausgrid,const
 from probability_tt import fit_mixture_em,mixture_probability_mps,probability_scores,probability_posterior
 from scalable import fourier_deadband_mpo, fourier_uniform_error_bound
 from powerflow import ACTIONS
-from tensor import tt_scalar_count,tt_bond_ranks
+from fast_fourier import FactorizedFourier, fourier_domain
 
 MONITORED=(18,33)
 DEADBAND=0.020
 
 
-def calibrate_multi_terminal(feeder,centers,site_buses=SITES,monitored=MONITORED,actions=ACTIONS):
+def calibrate_multi_terminal(feeder,centers,site_buses=SITES,monitored=MONITORED,actions=ACTIONS,
+                             *, dispatch_map=action_injections):
     """One full AC solve at reference + two per categorical site per action.
 
     Returns c[a,monitor], f[a,monitor,site,category] for additive voltage
@@ -40,49 +42,50 @@ def calibrate_multi_terminal(feeder,centers,site_buses=SITES,monitored=MONITORED
     f=np.zeros((len(actions),len(monitored),m,3))
     buses=np.asarray(monitored)-1
     for a_idx,a in enumerate(actions):
-        v0=np.abs(feeder.ac(state_power(base,centers,site_buses,ref),actions=action_injections(a)))[buses]
+        v0=np.abs(feeder.ac(state_power(base,centers,site_buses,ref),actions=dispatch_map(a)))[buses]
         const[a_idx]=v0-1
         for j in range(m):
             for k in (0,2):
                 changed=ref.copy();changed[j]=k
                 vk=np.abs(feeder.ac(state_power(base,centers,site_buses,changed),
-                     actions=action_injections(a)))[buses]
+                     actions=dispatch_map(a)))[buses]
                 f[a_idx,:,j,k]=vk-v0
     return const,f,len(actions)*(1+2*m)
 
 
 def operators_from_affine(constants,contributions,deadband=DEADBAND,harmonics=8):
-    # Use one common domain containing all possible state combinations.
-    domain=1.05*max(
-        max(abs(c+g.min(axis=-1).sum()),abs(c+g.max(axis=-1).sum()))
-        for row_c,row_f in zip(constants,contributions,strict=True)
-        for c,g in zip(row_c,row_f,strict=True)
-    )
-    domain=max(domain,deadband*1.01)
+    domain=fourier_domain(constants,contributions,deadband)
     ops=tuple(fourier_deadband_mpo(c,g,deadband,domain,harmonics)
               for row_c,row_f in zip(constants,contributions,strict=True)
               for c,g in zip(row_c,row_f,strict=True))
     return ops,domain
 
 
-def independent_probability_tt(states):
+def independent_mixture(states):
     # Independent marginals estimated on same training data in each clock regime.
     counts=np.stack([(np.bincount(states[:,i],minlength=3)+.5)/(len(states)+1.5)
                      for i in range(states.shape[1])],axis=0)
-    return mixture_probability_mps(np.ones(1),counts[None,:,:])
+    return np.ones(1),counts[None,:,:]
+
+
+def independent_probability_tt(states):
+    return mixture_probability_mps(*independent_mixture(states))
 
 
 def choose_actions(model,ops,constants,contributions,observed,*,num_monitored=len(MONITORED),deadband=DEADBAND):
     """Compute correlated-TT decision and plug-in mean decision on same model."""
-    scores,den=probability_scores(model,ops,observed)
+    if isinstance(ops,FactorizedFourier):
+        scores,margins,den=ops.scores_and_marginals(*model,observed)
+    else:
+        scores,den=probability_scores(model,ops,observed)
+        margins=np.zeros((len(contributions[0,0]),3))
+        for site in range(len(margins)):
+            if site in observed:
+                margins[site,observed[site]]=1.
+            else:
+                margins[site]=probability_posterior(model,observed,site,den=den)
     objective=np.mean(scores.reshape(len(ACTIONS),num_monitored),axis=1)
     ranks=np.argsort(objective)
-    margins=np.zeros((len(contributions[0,0]),3))
-    for site in range(len(margins)):
-        if site in observed:
-            margins[site,observed[site]]=1.
-        else:
-            margins[site]=probability_posterior(model,observed,site,den=den)
     voltage=constants+np.einsum('amij,ij->am',contributions,margins,optimize=True)
     mean_loss=np.maximum(0,np.abs(voltage)-deadband).mean(axis=1)
     return int(ranks[0]),int(np.argmin(mean_loss)),float(objective[ranks[1]]-objective[ranks[0]]),float(den)
@@ -105,9 +108,11 @@ def block_bootstrap_ci(values,days,seed=20261120,replications=500):
 def run_benchmark(path=DATA_PATH,*,sites=SITES,observed_sites=OBSERVED_SITES,
                   harmonics=8,components=3,max_test=320,seed=20261120,
                   train_days=160,test_start_day=215,test_days=115,solar_scale=1.5,
-                  slack=1.02,load_scale=.65,deadband=DEADBAND):
+                  slack=1.02,load_scale=.65,deadband=DEADBAND,backend='factorized'):
     if harmonics<1 or components<1 or max_test<20:
         raise ValueError('harmonics and components must be positive; max_test >= 20')
+    if backend not in ('factorized','dense'):
+        raise ValueError('expected factorized or dense backend')
     times,gc,pv=read_ausgrid(path)
     feeder=Feeder33(slack=slack,base_load_scale=load_scale)
     powers=construct_profiles(gc,pv,feeder,sites=sites,day_lags=tuple(range(0,len(sites)*3,3)),solar_scale=solar_scale)
@@ -121,12 +126,25 @@ def run_benchmark(path=DATA_PATH,*,sites=SITES,observed_sites=OBSERVED_SITES,
     for bucket in range(4):
         subset=cats_train[train_regimes==bucket]
         fit=fit_mixture_em(subset,components=components,seed=seed+bucket,restarts=2,iterations=85)
-        models[bucket]=mixture_probability_mps(fit['weights'],fit['local_probabilities'])
-        independent[bucket]=independent_probability_tt(subset)
+        mixture=fit['weights'],fit['local_probabilities']
+        independent_mix=independent_mixture(subset)
+        if backend=='factorized':
+            models[bucket],independent[bucket]=mixture,independent_mix
+        else:
+            models[bucket]=mixture_probability_mps(*mixture)
+            independent[bucket]=mixture_probability_mps(*independent_mix)
+        count,site_count,levels=mixture[1].shape
         size_info[bucket]={'samples':len(subset),'em_iter':fit['em_iterations'],
-                           'probability_scalars':tt_scalar_count(models[bucket])}
+                           'probability_scalars':levels*(2*count+(site_count-2)*count**2),
+                           'probability_array_bytes':sum(x.nbytes for x in models[bucket])}
     constants,contributions,offline_calls=calibrate_multi_terminal(feeder,centers,sites)
-    ops,domain=operators_from_affine(constants,contributions,deadband,harmonics)
+    if backend=='factorized':
+        ops=FactorizedFourier(constants,contributions,deadband,harmonics)
+        domain=ops.domain
+        operator_bytes=ops.nbytes
+    else:
+        ops,domain=operators_from_affine(constants,contributions,deadband,harmonics)
+        operator_bytes=sum(core.nbytes for op in ops for core in op)
     n=len(test)
     selected=np.unique(np.linspace(0,n-1,min(max_test,n),dtype=int))
     test_idx=test[selected]
@@ -179,9 +197,12 @@ def run_benchmark(path=DATA_PATH,*,sites=SITES,observed_sites=OBSERVED_SITES,
         random_sites=len(sites),observed_sites=len(observed_sites),
         possible_states=int(3**len(sites)),
         probability_scalars=max(x['probability_scalars'] for x in size_info.values()),
-        probability_max_bond=max(max(tt_bond_ranks(model)) for model in models.values()),
-        mpo_scalars_per_action_monitor=tt_scalar_count(ops[0]),
-        mpo_max_bond=max(tt_bond_ranks(ops[0])),
+        probability_max_bond=components,
+        # Preserve reference dense TT layout metrics for cross-run comparisons.
+        mpo_scalars_per_action_monitor=3*(2*(2*harmonics+1)+(len(sites)-2)*(2*harmonics+1)**2),
+        mpo_max_bond=2*harmonics+1,
+        operator_backend=backend,
+        operator_array_bytes=operator_bytes,
         offline_ac_calibration_calls=offline_calls,
         total_heldout_ac_calls=int(len(test_idx)*len(ACTIONS)+len(test_idx)),
         fourier_uniform_bound=float(fourier_uniform_error_bound(domain,harmonics)),
@@ -217,6 +238,79 @@ def run_benchmark(path=DATA_PATH,*,sites=SITES,observed_sites=OBSERVED_SITES,
             solar_scale=solar_scale))
 
 
+def compare_fourier_backends(path=DATA_PATH, *, harmonics=16, components=3, repeats=5, seed=20261120):
+    """Time equivalent uncached scoring across all 4 time regimes and 9 evidence pairs."""
+    if repeats < 1:
+        raise ValueError('repeats must be positive')
+    from platform import machine, python_version, system
+    start = perf_counter()
+    _, gross, pv = read_ausgrid(path)
+    feeder = Feeder33()
+    lags = tuple(range(0, len(SITES)*3, 3))
+    powers = construct_profiles(gross, pv, feeder, day_lags=lags)
+    train, _ = split_indices(len(powers), day_lags=lags)
+    _, centers, states = fit_categories(powers[train])
+    data_seconds = perf_counter() - start
+    start = perf_counter()
+    mixtures = []
+    buckets = regime(train)
+    for index in range(4):
+        fit = fit_mixture_em(states[buckets == index], components=components, seed=seed+index,
+                             restarts=2, iterations=85)
+        mixtures.append((fit['weights'], fit['local_probabilities']))
+    em_seconds = perf_counter() - start
+    start = perf_counter()
+    constants, contributions, ac_calls = calibrate_multi_terminal(feeder, centers)
+    calibration_seconds = perf_counter() - start
+    observed_cases = [dict(zip(OBSERVED_SITES, levels, strict=True))
+                      for levels in np.ndindex(3, 3)]
+    results = {}
+    score_arrays = {}
+    for backend in ('dense', 'factorized'):
+        construction = []
+        scoring = []
+        for _ in range(repeats):
+            start = perf_counter()
+            if backend == 'dense':
+                ops, _ = operators_from_affine(constants, contributions, DEADBAND, harmonics)
+                probabilities = [mixture_probability_mps(*mix) for mix in mixtures]
+            else:
+                ops = FactorizedFourier(constants, contributions, DEADBAND, harmonics)
+                probabilities = mixtures
+            construction.append(perf_counter() - start)
+            start = perf_counter()
+            if backend == 'dense':
+                rows = [probability_scores(prob, ops, obs)[0].reshape(constants.shape)
+                        for prob in probabilities for obs in observed_cases]
+            else:
+                rows = [ops.scores(*mixture, obs)
+                        for mixture in probabilities for obs in observed_cases]
+            scoring.append(perf_counter() - start)
+        score_arrays[backend] = np.array(rows)
+        if backend == 'dense':
+            array_bytes = sum(c.nbytes for operator in ops for c in operator)
+        else:
+            array_bytes = ops.nbytes
+        model_bytes = sum(x.nbytes for model in probabilities for x in model)
+        results[backend] = dict(operator_bytes=array_bytes, probability_bytes=model_bytes,
+                                construction_seconds_median=float(np.median(construction)),
+                                seconds_per_evidence_median=float(np.median(scoring))/len(rows))
+    dense, fast = score_arrays['dense'], score_arrays['factorized']
+    result = dict(harmonics=harmonics, evidence_cases=len(dense), mixture_components=components,
+                  repeats=repeats, seed=seed, platform=system(), architecture=machine(),
+                  python=python_version(), numpy=np.__version__,
+                  timing_scope='Uncached scoring of six actions at two monitors per context; 4 regimes x 9 observed pairs.',
+                  storage_scope='Array payload of all 12 loss operators and all 4 probability models. Excludes workspace and Python object overhead.',
+                  data_preparation_seconds=data_seconds, mixture_training_seconds=em_seconds,
+                  ac_calibration_seconds=calibration_seconds, common_ac_solves=ac_calls,
+                  max_abs_score_difference=float(np.max(np.abs(dense-fast))),
+                  action_agreement=float(np.mean(np.argmin(dense.mean(axis=-1), axis=-1) ==
+                                                 np.argmin(fast.mean(axis=-1), axis=-1))), backends=results)
+    result['online_speedup'] = results['dense']['seconds_per_evidence_median']/results['factorized']['seconds_per_evidence_median']
+    result['operator_storage_ratio'] = results['dense']['operator_bytes']/results['factorized']['operator_bytes']
+    return result
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--data',type=Path,default=DATA_PATH)
@@ -225,12 +319,21 @@ def main():
     parser.add_argument('--max-test',type=int,default=320)
     parser.add_argument('--seed',type=int,default=20261120)
     parser.add_argument('--solar-scale',type=float,default=1.5)
-    parser.add_argument('--out',type=Path,default=Path('examples/ieee33_ausgrid_results.json'))
+    parser.add_argument('--backend',choices=('factorized','dense'),default='factorized')
+    parser.add_argument('--compare-backends',action='store_true',
+                        help='time equivalent dense and phase-factorized conditional scoring')
+    parser.add_argument('--out',type=Path)
     args=parser.parse_args()
-    result=run_benchmark(args.data,harmonics=args.harmonics,components=args.components,
-               max_test=args.max_test,seed=args.seed,solar_scale=args.solar_scale)
-    args.out.parent.mkdir(parents=True,exist_ok=True)
-    args.out.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    if args.compare_backends:
+        result=compare_fourier_backends(args.data,harmonics=args.harmonics,components=args.components,seed=args.seed)
+    else:
+        result=run_benchmark(args.data,harmonics=args.harmonics,components=args.components,
+                   max_test=args.max_test,seed=args.seed,solar_scale=args.solar_scale,backend=args.backend)
+        if args.out is None:
+            args.out=Path('examples/ieee33_ausgrid_results.json')
+    if args.out is not None:
+        args.out.parent.mkdir(parents=True,exist_ok=True)
+        args.out.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(result,ensure_ascii=False,indent=2))
 
 
